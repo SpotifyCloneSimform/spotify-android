@@ -49,6 +49,7 @@ android {
 
 dependencies {
 
+    val navVersion = "2.6.0"
     val hiltVersion = "2.46.1"
     val okHttpVersion = "4.11.0"
     val retrofitVersion = "2.9.0"
@@ -59,6 +60,10 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.fragment:fragment-ktx:1.6.0")
     implementation("androidx.preference:preference-ktx:1.2.0")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")

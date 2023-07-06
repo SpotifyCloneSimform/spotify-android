@@ -100,6 +100,9 @@ class AuthActivity : BaseActivity<ActivityAuthBinding, AuthViewModel>() {
     }
 
     private fun loginSuccess() {
-        // TODO: Navigate to home and finish this activity
+        Intent(this, MainActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
+        finish()
     }
 }
