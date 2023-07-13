@@ -41,6 +41,6 @@ abstract class BaseActivity<Binding : ViewDataBinding, ViewModel : androidx.life
 
     private fun setupTheme() {
         // Set dark mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 }

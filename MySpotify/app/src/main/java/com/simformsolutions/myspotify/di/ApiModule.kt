@@ -5,7 +5,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.simformsolutions.myspotify.BuildConfig
 import com.simformsolutions.myspotify.data.repository.AuthRepository
+import com.simformsolutions.myspotify.data.repository.HomeRepository
 import com.simformsolutions.myspotify.data.service.AuthService
+import com.simformsolutions.myspotify.data.service.HomeService
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import com.simformsolutions.myspotify.intercepter.ApiInterceptor
 import com.simformsolutions.myspotify.utils.AppConstants
@@ -75,7 +77,7 @@ object ApiModule {
     @Named(API_RETROFIT)
     fun providesApiRetrofit(gson: Gson, client: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(AppConstants.BASE_API_URL)
+            .baseUrl(AppConstants.BASE_API_URL+AppConstants.VERSION)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -89,4 +91,16 @@ object ApiModule {
     @Provides
     fun providesAuthRepository(authService: AuthService): AuthRepository =
         AuthRepository(authService)
+
+    @Singleton
+    @Provides
+    fun providesHomeService(@Named(API_RETROFIT) retrofit: Retrofit): HomeService =
+        retrofit.create(HomeService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesHomeRepository(homeService: HomeService): HomeRepository =
+        HomeRepository(homeService)
+
+
 }

@@ -17,7 +17,7 @@ abstract class BaseRepository {
                         val errorResponse = Gson().fromJson(
                             response.errorBody()?.string(), ApiError::class.java
                         )
-                        return Resource.Error(errorResponse.message)
+                        return Resource.Error(errorResponse.message ?: "Something went wrong!")
                     }
                 } else {
                     return Resource.Error(response.message())

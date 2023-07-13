@@ -11,9 +11,11 @@ import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.databinding.ActivityMainBinding
 import com.simformsolutions.myspotify.ui.base.BaseActivity
 import com.simformsolutions.myspotify.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var navController: NavController
