@@ -30,6 +30,11 @@
                     android:host="com.myspotify"
                     android:scheme="myspotify" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
