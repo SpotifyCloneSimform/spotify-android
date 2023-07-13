@@ -1,7 +1,7 @@
 package com.simformsolutions.myspotify.ui.base
 
 import com.google.gson.Gson
-import com.simformsolutions.myspotify.data.repository.ApiError
+import com.simformsolutions.myspotify.data.model.remote.ApiError
 import com.simformsolutions.myspotify.utils.Resource
 import retrofit2.Response
 
@@ -17,7 +17,7 @@ abstract class BaseRepository {
                         val errorResponse = Gson().fromJson(
                             response.errorBody()?.string(), ApiError::class.java
                         )
-                        return Resource.Error(errorResponse.message)
+                        return Resource.Error(errorResponse.message ?: "Something went wrong!")
                     }
                 } else {
                     return Resource.Error(response.message())

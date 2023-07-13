@@ -2,7 +2,12 @@
 
     <!-- Base application theme. -->
     <style name="Base.Theme.MySpotify" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorAccent">#ff1db954</item>
+        <item name="colorAccent">#FF1DB954</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorSecondaryContainer">#222222</item>
+        <item name="materialButtonStyle">@style/MaterialButton</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="colorSurface">#373737</item>
     </style>
 
     <style name="Theme.MySpotify" parent="Base.Theme.MySpotify">

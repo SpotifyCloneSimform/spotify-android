@@ -5,7 +5,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.simformsolutions.myspotify.BuildConfig
 import com.simformsolutions.myspotify.data.repository.AuthRepository
+import com.simformsolutions.myspotify.data.repository.SearchRepository
 import com.simformsolutions.myspotify.data.service.AuthService
+import com.simformsolutions.myspotify.data.service.SearchService
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import com.simformsolutions.myspotify.intercepter.ApiInterceptor
 import com.simformsolutions.myspotify.utils.AppConstants
@@ -38,7 +40,8 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun providesApiInterceptor(preferenceHelper: PreferenceHelper): ApiInterceptor = ApiInterceptor(preferenceHelper)
+    fun providesApiInterceptor(preferenceHelper: PreferenceHelper): ApiInterceptor =
+        ApiInterceptor(preferenceHelper)
 
     @Provides
     @Singleton
@@ -75,7 +78,7 @@ object ApiModule {
     @Named(API_RETROFIT)
     fun providesApiRetrofit(gson: Gson, client: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(AppConstants.BASE_API_URL)
+            .baseUrl(AppConstants.BASE_API_URL + AppConstants.VERSION)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -89,4 +92,14 @@ object ApiModule {
     @Provides
     fun providesAuthRepository(authService: AuthService): AuthRepository =
         AuthRepository(authService)
+
+    @Singleton
+    @Provides
+    fun providesSearchService(@Named(API_RETROFIT) retrofit: Retrofit): SearchService =
+        retrofit.create(SearchService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesSearchRepository(searchService: SearchService): SearchRepository =
+        SearchRepository(searchService)
 }

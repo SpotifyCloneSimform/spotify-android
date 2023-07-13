@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="category"
+            type="com.simformsolutions.myspotify.data.model.remote.Category" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/categoryContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginVertical="@dimen/dp_8"
+        app:strokeWidth="@dimen/dp_0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txtTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{ category.name }"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/imgCategory"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Podcasts" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgCategory"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:rotation="36"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.RoundCorner"
+                bind:imageUrl="@{ category.images[0].url }"
+                tools:srcCompat="@drawable/albums" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

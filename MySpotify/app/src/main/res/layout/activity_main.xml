@@ -38,13 +38,13 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
+            style="@style/PrimaryBottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/colorPrimary"
             app:elevation="@dimen/dp_6"
             app:itemIconTint="?attr/colorOnBackground"
             app:itemTextColor="?attr/colorOnBackground"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom_nav" />
 
