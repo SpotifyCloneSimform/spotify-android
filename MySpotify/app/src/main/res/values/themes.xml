@@ -15,4 +15,14 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="TextViewTitle" parent="Base.Theme.MySpotify">
+        <item name="android:textColor"> @color/whitePure </item>
+        <item name="android:textSize"> @dimen/sp_16 </item>
+    </style>
+
+    <style name="TextViewSubTitle" parent="Base.Theme.MySpotify">
+        <item name="android:textColor"> @color/grey </item>
+        <item name="android:textSize"> @dimen/sp_14 </item>
+    </style>
 </resources>

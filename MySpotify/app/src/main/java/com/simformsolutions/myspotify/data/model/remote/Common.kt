@@ -9,23 +9,21 @@ data class Image(
 )
 
 data class ExternalUrl(
-    @SerializedName("spotify")
-    val spotify: String
+    @SerializedName("spotify") val spotify: String
 )
 
 data class ExternalId(
-    @SerializedName("isrc")
-    val isrc: String
+    @SerializedName("isrc") val isrc: String
 )
 
 data class VideoThumbnail(
-    @SerializedName("url")
-    val url: String?
+    @SerializedName("url") val url: String?
 )
 
 data class Followers(
-    @SerializedName("href")
-    val href: String?,
-    @SerializedName("total")
-    val total: Int
+    @SerializedName("href") val href: String?, @SerializedName("total") val total: Int
+)
+
+data class CopyRights(
+    @SerializedName("text") val text: String?, @SerializedName("type") val type: String?
 )
