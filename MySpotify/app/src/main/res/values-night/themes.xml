@@ -2,6 +2,7 @@
 
     <style name="Theme.MySpotify" parent="Base.Theme.MySpotify">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_primary</item> -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
