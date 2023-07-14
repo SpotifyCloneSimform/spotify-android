@@ -15,7 +15,7 @@ class ApiInterceptor(
         val token = if (chain.request().url.toString().startsWith(AppConstants.BASE_AUTH_URL)) {
             Credentials.basic(AppConstants.CLIENT_ID, AppConstants.CLIENT_SECRET)
         } else {
-            preferenceHelper.getString(PreferenceKeys.ACCESS_TOKEN, "")
+            "Bearer " + preferenceHelper.getString(PreferenceKeys.ACCESS_TOKEN, "")
         }
 
         val request = chain.request().newBuilder()

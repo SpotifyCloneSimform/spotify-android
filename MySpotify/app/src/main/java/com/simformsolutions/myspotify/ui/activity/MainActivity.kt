@@ -9,11 +9,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.databinding.ActivityMainBinding
+import com.simformsolutions.myspotify.extentions.getThemeColor
 import com.simformsolutions.myspotify.ui.base.BaseActivity
 import com.simformsolutions.myspotify.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private lateinit var navController: NavController
@@ -31,8 +34,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initializeObservers() {
         super.initializeObservers()
         lifecycleScope.launch {
-            viewModel.subtitle.collectLatest { subtitle ->
-                binding.toolbar.subtitle = subtitle
+            launch {
+                viewModel.subtitle.collectLatest { subtitle ->
+                    binding.toolbar.subtitle = subtitle
+                }
+            }
+            launch {
+                viewModel.toolbarColor.collectLatest { color ->
+                    binding.toolbar.setBackgroundColor(color ?: getThemeColor(com.google.android.material.R.attr.backgroundColor))
+                }
             }
         }
     }

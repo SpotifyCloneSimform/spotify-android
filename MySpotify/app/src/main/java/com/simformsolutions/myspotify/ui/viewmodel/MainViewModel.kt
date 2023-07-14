@@ -18,6 +18,9 @@ class MainViewModel @Inject constructor(
     private val _subtitle = MutableStateFlow("")
     val subtitle = _subtitle.asStateFlow()
 
+    private val _toolbarColor = MutableStateFlow<Int?>(null)
+    val toolbarColor = _toolbarColor.asStateFlow()
+
     fun setSubtitle(subtitle: String) {
         viewModelScope.launch {
             _subtitle.emit(subtitle)
@@ -27,6 +30,12 @@ class MainViewModel @Inject constructor(
     fun clearSubtitle() {
         viewModelScope.launch {
             _subtitle.emit("")
+        }
+    }
+
+    fun updateToolbarColor(color: Int?) {
+        viewModelScope.launch {
+            _toolbarColor.emit(color)
         }
     }
 

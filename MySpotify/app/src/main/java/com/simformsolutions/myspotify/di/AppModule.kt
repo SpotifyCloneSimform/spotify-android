@@ -1,6 +1,7 @@
 package com.simformsolutions.myspotify.di
 
 import android.content.Context
+import android.content.res.Resources
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesPreferenceHelper(@ApplicationContext context: Context) = PreferenceHelper(context)
+    fun providesPreferenceHelper(@ApplicationContext context: Context): PreferenceHelper = PreferenceHelper(context)
+
+    @Singleton
+    @Provides
+    fun providesResources(@ApplicationContext context: Context): Resources = context.resources
 }
