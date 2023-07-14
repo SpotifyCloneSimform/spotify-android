@@ -14,6 +14,11 @@
     <string name="show">Show</string>
     <string name="episode">Episode</string>
     <string name="audiobook">Audiobook</string>
+    <string name="followers">%1$d followers</string>
+    <string name="label_search">Search</string>
+    <string name="label_search_history">Search History</string>
+    <string name="label_profile">Profile</string>
+    <string name="profile_item_description">%1$d followers • %2$s</string>
     <string name="home">Home</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="songname">SongName</string>
@@ -24,7 +29,6 @@
     <string name="user_library">User Library</string>
     <string name="all">All</string>
     <string name="related_artist">Related Artist</string>
-    <string name="followers">%1$s Followers</string>
     <string name="all_episodes">All Episodes</string>
     <string name="see_more">See more</string>
     <string name="library">Library</string>
