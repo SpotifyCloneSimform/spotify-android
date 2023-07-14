@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_searchFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_categoryPlaylistFragment"
+            app:destination="@id/categoryPlaylistFragment" />
     </fragment>
 
     <fragment
@@ -86,6 +89,19 @@
         <argument
             android:name="showData"
             app:argType=".data.model.local.ShowData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryPlaylistFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.CategoryPlaylistFragment"
+        android:label="{categoryName}"
+        tools:layout="@layout/fragment_category_playlist">
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
     </fragment>
 
 </navigation>

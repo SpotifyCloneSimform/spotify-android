@@ -1,5 +1,6 @@
 package com.simformsolutions.myspotify.data.repository
 
+import com.simformsolutions.myspotify.data.model.remote.PlaylistItems
 import com.simformsolutions.myspotify.data.model.remote.MediaItems
 import com.simformsolutions.myspotify.data.model.remote.Playlist
 import com.simformsolutions.myspotify.data.service.PlaylistService
@@ -24,6 +25,14 @@ class PlaylistRepository(
     suspend fun getPlaylist(playlistId: String, fields: String? = null) = flow<Resource<Playlist>> {
         emit(Resource.Loading())
         playlistService.getPlaylist(playlistId, fields).let { response ->
+            val resource = handleResponse(response)
+            emit(resource)
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun getCategoryPlaylists(categoryId: String) = flow<Resource<PlaylistItems>> {
+        emit(Resource.Loading())
+        playlistService.getCategoryPlaylists(categoryId).let { response ->
             val resource = handleResponse(response)
             emit(resource)
         }

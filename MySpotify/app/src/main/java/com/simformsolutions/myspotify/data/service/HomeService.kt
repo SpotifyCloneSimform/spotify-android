@@ -1,6 +1,6 @@
 package com.simformsolutions.myspotify.data.service
 
-import com.simformsolutions.myspotify.data.model.remote.FeaturedPlaylist
+import com.simformsolutions.myspotify.data.model.remote.PlaylistItems
 import com.simformsolutions.myspotify.data.model.remote.HomeAlbumItems
 import com.simformsolutions.myspotify.data.model.remote.MediaItems
 import com.simformsolutions.myspotify.data.model.remote.Playlist
@@ -16,5 +16,5 @@ interface HomeService {
     suspend fun getSongAlbums(): Response<MediaItems<HomeAlbumItems>>
 
     @GET("browse/featured-playlists")
-    suspend fun getFeaturedPlaylist(): Response<FeaturedPlaylist>
+    suspend fun getFeaturedPlaylist(): Response<PlaylistItems>
 }
