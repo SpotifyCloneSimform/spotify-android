@@ -13,4 +13,9 @@ interface AuthService {
     @FormUrlEncoded
     @POST("api/token")
     suspend fun getAuthorizationToken(@FieldMap body: HashMap<String, String>): Response<AuthResponse>
+
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("api/token")
+    suspend fun refreshAccessToken(@FieldMap body: HashMap<String, String>): Response<AuthResponse>
 }

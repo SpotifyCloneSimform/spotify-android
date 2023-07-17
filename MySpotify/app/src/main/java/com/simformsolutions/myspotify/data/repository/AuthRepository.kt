@@ -12,11 +12,15 @@ class AuthRepository(
     private val authService: AuthService
 ) : BaseRepository() {
 
-    suspend fun getAuthorizationToken(body: HashMap<String, String>) = flow<Resource<AuthResponse>> {
-        emit(Resource.Loading())
-        authService.getAuthorizationToken(body).let { response ->
-            val resource = handleResponse(response)
-            emit(resource)
-        }
-    }.flowOn(Dispatchers.IO)
+    suspend fun getAuthorizationToken(body: HashMap<String, String>) =
+        flow<Resource<AuthResponse>> {
+            emit(Resource.Loading())
+            authService.getAuthorizationToken(body).let { response ->
+                val resource = handleResponse(response)
+                emit(resource)
+            }
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun refreshAccessToken(body: HashMap<String, String>): Resource<AuthResponse> =
+        handleResponse(authService.refreshAccessToken(body))
 }
