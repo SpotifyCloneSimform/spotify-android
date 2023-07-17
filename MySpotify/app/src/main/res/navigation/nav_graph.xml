@@ -38,7 +38,44 @@
             app:argType="string" />
         <argument
             android:name="type"
-            app:argType=".data.model.local.ItemType" />
+            app:argType=".data.model.local.LibraryItemType" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userLibraryFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.UserLibraryFragment"
+        android:label="Library"
+        tools:layout="@layout/fragment_user_library">
+        <action
+            android:id="@+id/action_userLibraryFragment_to_viewPlaylistFragment"
+            app:destination="@id/viewPlaylistFragment" />
+        <action
+            android:id="@+id/action_userLibraryFragment_to_viewArtistProfile"
+            app:destination="@id/viewArtistProfile" />
+        <action
+            android:id="@+id/action_userLibraryFragment_to_viewPodcastEpisodes"
+            app:destination="@id/viewPodcastEpisodes" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewArtistProfile"
+        android:name="com.simformsolutions.myspotify.ui.fragment.ViewArtistProfileFragment"
+        tools:layout="@layout/fragment_view_artist_profile">
+        <argument
+            android:name="artistId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_viewArtistProfile_self"
+            app:destination="@id/viewArtistProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewPodcastEpisodes"
+        android:name="com.simformsolutions.myspotify.ui.fragment.ViewPodcastEpisodes"
+        tools:layout="@layout/fragment_view_podcast_episodes">
+        <argument
+            android:name="showData"
+            app:argType=".data.model.local.ShowData" />
     </fragment>
 
 </navigation>

@@ -12,7 +12,7 @@ data class DisplaySongData(
     val songName: String?,
     val artistsName: String?,
     val image: String?,
-    val type: ItemType,
+    val type: LibraryItemType,
     var id: String? = null,
     var songDuration: Int? = null,
     var title: String? = null,

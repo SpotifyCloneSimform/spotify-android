@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.simformsolutions.myspotify.ui.viewmodel.ViewEpisodeViewModel" />
+
+        <variable
+            name="showData"
+            type="com.simformsolutions.myspotify.data.model.local.ShowData" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:padding="@dimen/dp_16">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            tools:context=".ui.fragment.HomeFragment">
+
+            <ImageView
+                android:id="@+id/imgShow"
+                android:layout_width="@dimen/dp_128"
+                android:layout_height="@dimen/dp_128"
+                android:scaleType="centerCrop"
+                bind:imageUrl="@{ showData.images }"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/albums" />
+            
+            <TextView
+                android:id="@+id/tvShowName"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_12"
+                tools:text="asfasdssdsafafasfasfad"
+                android:textSize="@dimen/sp_28"
+                android:text="@{ showData.name }"
+                app:layout_constraintBottom_toTopOf="@id/tvPublisherName"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="@id/imgShow"
+                app:layout_constraintStart_toEndOf="@id/imgShow"
+                app:layout_constraintEnd_toEndOf="parent" />
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPublisherName"
+                app:layout_constraintTop_toBottomOf="@id/tvShowName"
+                tools:text="name"
+                android:textSize="@dimen/sp_12"
+                android:text="@{ showData.publisher }"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/tvShowName"
+                app:layout_constraintBottom_toBottomOf="@id/imgShow"
+                app:layout_constraintEnd_toEndOf="parent" />
+                
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                tools:text="DescriptionDescriptionDescripttionDescriptionDescriptionDescriptionDescriptionionDescription"
+                app:layout_constraintTop_toBottomOf="@id/imgShow"
+                android:layout_marginTop="@dimen/dp_16"
+                android:textColor="@color/white"
+                android:maxLines="@{ showData.isExpand ? Integer.MAX_VALUE : 2 }"
+                android:text="@{ showData.description }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExpand"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintEnd_toEndOf="@id/tvDescription"
+                android:padding="@dimen/dp_0"
+                tools:text="@string/see_more"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ showData.isExpand ? `See less` : `See More` }"
+                android:background="@android:color/transparent"
+                />
+            
+            <TextView
+                android:id="@+id/tvAllEpisodes"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_episodes"
+                style="@style/TextViewTitle"
+                app:layout_constraintTop_toBottomOf="@id/btnExpand"
+                />
+                
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEpisodes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAllEpisodes"
+                android:layout_marginTop="@dimen/dp_16"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

@@ -26,7 +26,6 @@ class HomeAdapter(private val onItemClick: (HomeDisplayData) -> Unit ) : BaseAda
                 override fun onClick(item: HomeDisplayData, position: Int) {
                     onItemClick(item)
                 }
-
             }
         }
     }

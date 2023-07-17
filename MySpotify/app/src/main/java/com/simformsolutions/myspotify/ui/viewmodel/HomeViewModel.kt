@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.simformsolutions.myspotify.data.model.local.ItemType
 import com.simformsolutions.myspotify.data.model.local.HomeData
 import com.simformsolutions.myspotify.data.model.local.HomeDisplayData
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.repository.HomeRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
 import com.simformsolutions.myspotify.utils.Resource
@@ -43,7 +44,7 @@ class HomeViewModel @Inject constructor(
                                     HomeDisplayData(
                                         it, item.name ?: "",
                                         item.id,
-                                        ItemType.PLAYLIST
+                                        LibraryItemType.PLAYLIST
                                     )
                                 }
                             }
@@ -80,7 +81,7 @@ class HomeViewModel @Inject constructor(
                                             it,
                                             item.album.name ?: "N/A",
                                             it1,
-                                            ItemType.ALBUM
+                                            LibraryItemType.ALBUM
                                         )
                                     }
                                 }
@@ -117,7 +118,7 @@ class HomeViewModel @Inject constructor(
                                             it,
                                             item.name ?: "N/A",
                                             it1,
-                                            ItemType.PLAYLIST
+                                            LibraryItemType.PLAYLIST
                                         )
                                     }
                                 }

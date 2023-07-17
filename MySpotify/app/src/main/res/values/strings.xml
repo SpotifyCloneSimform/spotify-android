@@ -19,4 +19,13 @@
     <string name="songname">SongName</string>
     <string name="song_name">Song Name</string>
     <string name="play">Play</string>
+    <string name="playlists">Playlists</string>
+    <string name="podcast">Podcast</string>
+    <string name="user_library">User Library</string>
+    <string name="all">All</string>
+    <string name="related_artist">Related Artist</string>
+    <string name="followers">%1$s Followers</string>
+    <string name="all_episodes">All Episodes</string>
+    <string name="see_more">See more</string>
+    <string name="library">Library</string>
 </resources>

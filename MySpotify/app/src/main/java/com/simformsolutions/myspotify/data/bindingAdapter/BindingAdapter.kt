@@ -9,7 +9,7 @@ import com.simformsolutions.myspotify.R
 
 @SuppressLint("CheckResult")
 @BindingAdapter("imageUrl", "placeHolder", "isRounded", requireAll = false)
-fun ImageView.bindImage(url: String?, @DrawableRes placeholder: Int?, isRounded: Boolean?) {
+fun ImageView.bindImage(url: String?, @DrawableRes placeholder: Int? = null, isRounded: Boolean? = false) {
     if (url == null) return
 
     Glide.with(this)

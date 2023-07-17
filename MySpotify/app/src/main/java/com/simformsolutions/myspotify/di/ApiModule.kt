@@ -4,13 +4,19 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.simformsolutions.myspotify.BuildConfig
+import com.simformsolutions.myspotify.data.repository.ArtistProfileRepository
 import com.simformsolutions.myspotify.data.repository.AuthRepository
-import com.simformsolutions.myspotify.data.repository.SearchRepository
 import com.simformsolutions.myspotify.data.repository.HomeRepository
+import com.simformsolutions.myspotify.data.repository.SearchRepository
+import com.simformsolutions.myspotify.data.repository.UserLibraryRepository
+import com.simformsolutions.myspotify.data.repository.ViewEpisodeRepository
 import com.simformsolutions.myspotify.data.repository.ViewPlaylistRepository
 import com.simformsolutions.myspotify.data.service.AuthService
-import com.simformsolutions.myspotify.data.service.SearchService
 import com.simformsolutions.myspotify.data.service.HomeService
+import com.simformsolutions.myspotify.data.service.SearchService
+import com.simformsolutions.myspotify.data.service.UserLibraryService
+import com.simformsolutions.myspotify.data.service.ViewArtistProfileService
+import com.simformsolutions.myspotify.data.service.ViewEpisodesService
 import com.simformsolutions.myspotify.data.service.ViewPlaylistService
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import com.simformsolutions.myspotify.interceptor.ApiAuthenticator
@@ -140,5 +146,33 @@ object ApiModule {
     fun providesViewPlaylistRepository(viewPlaylistService: ViewPlaylistService): ViewPlaylistRepository =
         ViewPlaylistRepository(viewPlaylistService)
 
+    @Singleton
+    @Provides
+    fun providesUserLibraryService(@Named(API_RETROFIT) retrofit: Retrofit): UserLibraryService =
+        retrofit.create(UserLibraryService::class.java)
 
+    @Singleton
+    @Provides
+    fun providesUserLibraryRepository(userLibraryService: UserLibraryService): UserLibraryRepository =
+        UserLibraryRepository(userLibraryService)
+
+    @Singleton
+    @Provides
+    fun providesArtistProfileService(@Named(API_RETROFIT) retrofit: Retrofit): ViewArtistProfileService =
+        retrofit.create(ViewArtistProfileService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesArtistProfileRepository(artistProfileService: ViewArtistProfileService): ArtistProfileRepository =
+        ArtistProfileRepository(artistProfileService)
+
+    @Singleton
+    @Provides
+    fun providesViewEpisodesService(@Named(API_RETROFIT) retrofit: Retrofit): ViewEpisodesService =
+        retrofit.create(ViewEpisodesService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesViewEpisodeRepository(artistProfileService: ViewEpisodesService): ViewEpisodeRepository =
+        ViewEpisodeRepository(artistProfileService)
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="libraryData"
+            type="com.simformsolutions.myspotify.data.model.local.LibraryDisplay" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:padding="@dimen/dp_16"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgThumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            bind:imageUrl="@{ libraryData.image }"
+            tools:src="@drawable/albums"
+            android:scaleType="fitXY"
+            />
+
+        <TextView
+            android:id="@+id/tvPlaylistName"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            tools:text="Namegiuagfaiugfegfigiawfaigfhkkjjjjjjjjjjjjjjjjkjjhjhjjhjjjjjkjhkjhk"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ libraryData.name }"
+            android:layout_marginStart="@dimen/dp_16"
+            tools:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvOwnerName"
+            app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+            app:layout_constraintTop_toTopOf="@id/imgThumbnail"/>
+
+        <TextView
+            android:id="@+id/tvOwnerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Name"
+            android:layout_marginStart="@dimen/dp_16"
+            tools:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+            app:layout_constraintTop_toBottomOf="@id/tvPlaylistName"
+            app:layout_constraintBottom_toBottomOf="@id/imgThumbnail"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

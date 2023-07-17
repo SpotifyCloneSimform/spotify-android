@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.simformsolutions.myspotify.ui.viewmodel.UserLibraryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.UserLibraryFragment">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="?attr/colorSecondary"
+            android:indeterminateOnly="true"
+            android:visibility="@{ viewModel.isLoading() ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <HorizontalScrollView
+            android:id="@+id/chipScrollView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:paddingStart="@dimen/dp_16"
+            android:clipToPadding="false"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                >
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAll"
+                    android:layout_width="wrap_content"
+                    android:checkable="true"
+                    android:checked="true"
+                    app:chipBackgroundColor="@color/chip_selected"
+                    app:chipStrokeWidth="2dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/all"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPlaylist"
+                    android:layout_width="wrap_content"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_selected"
+                    app:chipStrokeWidth="2dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playlists"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipArtists"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/chip_selected"
+                    app:chipStrokeWidth="2dp"
+                    android:checkable="true"
+                    android:text="@string/artist"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAlbum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipBackgroundColor="@color/chip_selected"
+                    app:chipStrokeWidth="2dp"
+                    android:checkable="true"
+                    android:text="@string/album"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPodcast"
+                    android:layout_width="wrap_content"
+                    app:chipBackgroundColor="@color/chip_selected"
+                    app:chipStrokeWidth="2dp"
+                    android:checkable="true"
+                    android:layout_height="wrap_content"
+                    android:text="@string/podcast"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLibraryItems"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginTop="@dimen/dp_16"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/dp_8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipScrollView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
