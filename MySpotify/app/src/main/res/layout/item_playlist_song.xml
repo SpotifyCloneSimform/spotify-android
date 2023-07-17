@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="com.simformsolutions.myspotify.data.model.local.ItemType" />
+        <variable
+            name="song"
+            type="com.simformsolutions.myspotify.data.model.local.DisplaySongData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:bind="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:padding="@dimen/dp_8">
+
+        <ImageView
+            android:id="@+id/imgThumbnail"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/thumbnail"
+            android:scaleType="fitXY"
+            android:visibility="@{ song.type == ItemType.PLAYLIST ? View.VISIBLE : View.GONE }"
+            bind:imageUrl="@{ song.image }"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ song.songName }"
+            android:textSize="@dimen/sp_16"
+            bind:layout_constraintBottom_toTopOf="@id/artistName"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintHorizontal_bias="0"
+            bind:layout_constraintStart_toEndOf="@id/imgThumbnail"
+            bind:layout_constraintTop_toTopOf="@id/imgThumbnail"
+            tools:text="asfasdaosfhsaoihjo[is" />
+
+        <TextView
+            android:id="@+id/artistName"
+            style="@style/TextViewSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{ song.artistsName }"
+            bind:layout_constraintBottom_toBottomOf="@id/imgThumbnail"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintHorizontal_bias="0"
+            bind:layout_constraintStart_toEndOf="@id/songName"
+            bind:layout_constraintStart_toStartOf="@id/songName"
+            bind:layout_constraintTop_toBottomOf="@id/songName"
+            tools:text="ArtistName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

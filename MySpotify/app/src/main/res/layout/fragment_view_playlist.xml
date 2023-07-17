@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.simformsolutions.myspotify.data.model.local.ItemType" />
+
+        <variable
+            name="viewModel"
+            type="com.simformsolutions.myspotify.ui.viewmodel.ViewPlaylistViewModel" />
+
+        <variable
+            name="playlistInfo"
+            type="com.simformsolutions.myspotify.data.model.local.DisplaySong" />
+
+        <variable
+            name="additionInfo"
+            type="com.simformsolutions.myspotify.data.model.local.DisplayAlbumFooterView" />
+
+        <variable
+            name="artistInfo"
+            type="com.simformsolutions.myspotify.data.model.remote.AlbumArtist" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            tools:context=".ui.fragment.HomeFragment">
+
+            <ImageView
+                android:id="@+id/imgPlaylist"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="@dimen/dp_44"
+                android:contentDescription="@string/thumbnail"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:imageUrl="@{ playlistInfo.images }"
+                tools:src="@drawable/albums" />
+
+            <TextView
+                android:id="@+id/playlistName"
+                style="@style/TextViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@{ playlistInfo.name }"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgPlaylist"
+                tools:text="Playlist name" />
+
+            <TextView
+                android:id="@+id/ownerName"
+                style="@style/TextViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{ playlistInfo.owner }"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/playlistName"
+                app:layout_constraintStart_toStartOf="@id/playlistName"
+                app:layout_constraintTop_toBottomOf="@id/playlistName"
+                tools:text="Playlist name" />
+
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/play"
+                android:src="@drawable/baseline_play_circle_24"
+                app:layout_constraintEnd_toEndOf="@id/ownerName"
+                app:layout_constraintStart_toStartOf="@id/ownerName"
+                app:layout_constraintTop_toBottomOf="@id/ownerName" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_16"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/tvReleaseDate"
+                app:layout_constraintTop_toBottomOf="@id/btnPlay" />
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@{ `Release Date : `+ additionInfo.releaseDate }"
+                android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvSong"
+                tools:text="Date" />
+
+            <TextView
+                android:id="@+id/tvTotalSongs"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{ `Total Songs : `+additionInfo.totalSongs }"
+                android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
+                app:layout_constraintStart_toStartOf="@id/tvReleaseDate"
+                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate"
+                tools:text="SongsCount" />
+
+            <ImageView
+                android:id="@+id/artistImage"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/dp_8"
+                android:scaleType="fitXY"
+                android:src="@drawable/albums"
+                android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
+                app:layout_constraintStart_toStartOf="@id/tvTotalSongs"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalSongs"
+                bind:imageUrl="@{ playlistInfo.images }"
+                bind:isRounded="@{ true }" />
+
+            <TextView
+                android:id="@+id/tvArtistName"
+                style="@style/TextViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@{ playlistInfo.owner }"
+                android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="@id/artistImage"
+                app:layout_constraintStart_toEndOf="@id/artistImage"
+                app:layout_constraintTop_toTopOf="@id/artistImage"
+                tools:text="Artist Name" />
+
+            <TextView
+                android:id="@+id/tvCopyRight"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/dp_16"
+                android:text="@{ additionInfo.copyRight }"
+                android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/artistImage"
+                app:layout_constraintTop_toBottomOf="@id/artistImage"
+                tools:text="CopyrightCopyrightCopyrightCopyright" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

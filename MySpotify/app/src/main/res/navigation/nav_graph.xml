@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_searchHistoryFragment"
             app:destination="@id/searchHistoryFragment" />
@@ -19,4 +19,26 @@
         android:id="@+id/searchHistoryFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchHistoryFragment"
         android:label="SearchHistoryFragment" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_viewPlaylistFragment"
+            app:destination="@id/viewPlaylistFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewPlaylistFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.ViewPlaylistFragment"
+        tools:layout="@layout/fragment_view_playlist">
+        <argument
+            android:name="playlistId"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType=".data.model.local.ItemType" />
+    </fragment>
+
 </navigation>

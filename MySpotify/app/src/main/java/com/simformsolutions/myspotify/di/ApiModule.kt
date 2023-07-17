@@ -6,8 +6,12 @@ import com.google.gson.GsonBuilder
 import com.simformsolutions.myspotify.BuildConfig
 import com.simformsolutions.myspotify.data.repository.AuthRepository
 import com.simformsolutions.myspotify.data.repository.SearchRepository
+import com.simformsolutions.myspotify.data.repository.HomeRepository
+import com.simformsolutions.myspotify.data.repository.ViewPlaylistRepository
 import com.simformsolutions.myspotify.data.service.AuthService
 import com.simformsolutions.myspotify.data.service.SearchService
+import com.simformsolutions.myspotify.data.service.HomeService
+import com.simformsolutions.myspotify.data.service.ViewPlaylistService
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import com.simformsolutions.myspotify.interceptor.ApiAuthenticator
 import com.simformsolutions.myspotify.interceptor.AuthInterceptor
@@ -114,4 +118,27 @@ object ApiModule {
     @Provides
     fun providesSearchRepository(searchService: SearchService): SearchRepository =
         SearchRepository(searchService)
+
+    @Singleton
+    @Provides
+    fun providesHomeService(@Named(API_RETROFIT) retrofit: Retrofit): HomeService =
+        retrofit.create(HomeService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesHomeRepository(homeService: HomeService): HomeRepository =
+        HomeRepository(homeService)
+
+
+    @Singleton
+    @Provides
+    fun providesViewPlaylistService(@Named(API_RETROFIT) retrofit: Retrofit): ViewPlaylistService =
+        retrofit.create(ViewPlaylistService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesViewPlaylistRepository(viewPlaylistService: ViewPlaylistService): ViewPlaylistRepository =
+        ViewPlaylistRepository(viewPlaylistService)
+
+
 }
