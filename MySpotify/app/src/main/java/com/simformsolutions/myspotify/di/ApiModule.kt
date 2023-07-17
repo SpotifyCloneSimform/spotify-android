@@ -9,8 +9,10 @@ import com.simformsolutions.myspotify.data.repository.SearchRepository
 import com.simformsolutions.myspotify.data.service.AuthService
 import com.simformsolutions.myspotify.data.service.SearchService
 import com.simformsolutions.myspotify.helper.PreferenceHelper
-import com.simformsolutions.myspotify.intercepter.ApiInterceptor
+import com.simformsolutions.myspotify.interceptor.ApiAuthenticator
+import com.simformsolutions.myspotify.interceptor.AuthInterceptor
 import com.simformsolutions.myspotify.utils.AppConstants
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,8 +42,16 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun providesApiInterceptor(preferenceHelper: PreferenceHelper): ApiInterceptor =
-        ApiInterceptor(preferenceHelper)
+    fun providesAuthInterceptor(): AuthInterceptor =
+        AuthInterceptor()
+
+    @Provides
+    @Singleton
+    fun providesApiAuthenticator(
+        authRepository: Lazy<AuthRepository>,
+        preferenceHelper: PreferenceHelper
+    ): ApiAuthenticator =
+        ApiAuthenticator(authRepository, preferenceHelper)
 
     @Provides
     @Singleton
@@ -54,13 +64,15 @@ object ApiModule {
     @Singleton
     fun providesOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        apiIInterceptor: ApiInterceptor
+        authInterceptor: AuthInterceptor,
+        apiAuthenticator: ApiAuthenticator
     ): OkHttpClient =
         OkHttpClient.Builder()
             .readTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(apiIInterceptor)
+            .addInterceptor(authInterceptor)
+            .authenticator(apiAuthenticator)
             .build()
 
     @Provides

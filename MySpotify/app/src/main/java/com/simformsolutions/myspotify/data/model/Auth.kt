@@ -11,15 +11,11 @@ enum class GrantType(private val value: String) {
     }
 }
 
-data class AuthRequest(
-    @SerializedName("grant_type") val grantType: GrantType
-)
-
 data class AuthResponse(
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("refresh_token")
-    val refreshToken: String,
+    val refreshToken: String?,
     @SerializedName("token_type")
     val tokenType: String,
     @SerializedName("expire_time")

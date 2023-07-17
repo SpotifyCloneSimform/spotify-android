@@ -50,8 +50,13 @@ class AuthViewModel @Inject constructor(
                             preferenceHelper.apply {
                                 putBoolean(PreferenceKeys.IS_LOGGED_IN, true)
                                 putString(PreferenceKeys.ACCESS_TOKEN, data.accessToken)
-                                putString(PreferenceKeys.REFRESH_TOKEN, data.refreshToken)
-                                putInt(PreferenceKeys.EXPIRES_AT, Calendar.getInstance().get(Calendar.SECOND) + data.expireTime)
+                                putInt(
+                                    PreferenceKeys.EXPIRES_AT,
+                                    Calendar.getInstance().get(Calendar.SECOND) + data.expireTime
+                                )
+                                data.refreshToken?.let { refreshToken ->
+                                    putString(PreferenceKeys.REFRESH_TOKEN, refreshToken)
+                                }
                             }
                         }
                         _isLoading.emit(false)
