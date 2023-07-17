@@ -30,6 +30,7 @@ data class DisplayAlbumFooterView(
 enum class ItemType {
     PLAYLIST,
     ALBUM,
+    TRACK,
     ARTIST,
     PODCAST,
 }

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/searchHistoryFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchFragment"
         android:label="@string/label_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_searchHistoryFragment"
             app:destination="@id/searchHistoryFragment" />
@@ -22,16 +22,20 @@
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_search_history"
         android:id="@+id/searchHistoryFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchHistoryFragment"
-        android:label="@string/label_search_history" />
+        android:label="@string/label_search_history"
+        tools:layout="@layout/fragment_search_history">
+        <action
+            android:id="@+id/action_searchHistoryFragment_to_nowPlayingFragment"
+            app:destination="@id/nowPlayingFragment" />
+    </fragment>
 
     <fragment
-        tools:layout="@layout/layout_profile"
         android:id="@+id/userProfileFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.UserProfileFragment"
-        android:label="@string/label_profile" />
+        android:label="@string/label_profile"
+        tools:layout="@layout/layout_profile" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -104,4 +108,19 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nowPlayingFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.NowPlayingFragment"
+        android:label="NowPlayingFragment"
+        tools:layout="@layout/fragment_now_playing">
+        <argument
+            android:name="trackId"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType=".data.model.local.ItemType" />
+    </fragment>
 </navigation>

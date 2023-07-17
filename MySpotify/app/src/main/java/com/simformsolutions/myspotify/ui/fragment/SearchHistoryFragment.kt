@@ -8,9 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.simformsolutions.myspotify.R
+import com.simformsolutions.myspotify.data.model.local.ItemType
+import com.simformsolutions.myspotify.data.model.local.SearchItem
 import com.simformsolutions.myspotify.databinding.FragmentSearchHistoryBinding
 import com.simformsolutions.myspotify.extentions.getThemeColor
+import com.simformsolutions.myspotify.listener.ItemClickListener
 import com.simformsolutions.myspotify.ui.adapter.SearchAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
 import com.simformsolutions.myspotify.ui.dialog.TrackOptionsDialog
@@ -64,6 +68,11 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
         searchAdapter = SearchAdapter { item ->
             showTrackOptions(item.id)
         }
+        searchAdapter.itemClickListener = object : ItemClickListener<SearchItem> {
+            override fun onClick(item: SearchItem, position: Int) {
+                playTrack(item.id)
+            }
+        }
         binding.rvSearchHistory.adapter = searchAdapter
     }
 
@@ -72,6 +81,11 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
             this.trackId = trackId
         }
         dialog.show(childFragmentManager, TrackOptionsDialog.TAG)
+    }
+
+    private fun playTrack(trackId: String) {
+        val destination = SearchHistoryFragmentDirections.actionSearchHistoryFragmentToNowPlayingFragment(trackId, trackId, ItemType.TRACK)
+        findNavController().navigate(destination)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = false

@@ -4,7 +4,7 @@
     <style name="PrimaryBottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="itemActiveIndicatorStyle">@style/MyIndicator</item>
     </style>
-    
+
     <style name="MyIndicator" parent="ShapeAppearance.Material3.NavigationBarView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>
     </style>
@@ -12,13 +12,19 @@
     <style name="MaterialButton" parent="Widget.Material3.Button">
         <item name="cornerRadius">6dp</item>
     </style>
-    
+
     <style name="ShapeAppearanceOverlay.Material3.RoundCorner" parent="">
         <item name="cornerSize">25%</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.Material3.Round" parent="">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="PrimaryIconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconSize">@dimen/dp_24</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@android:color/transparent</item>
     </style>
 
 </resources>

@@ -43,7 +43,7 @@ class CategoryPlaylistViewModel @Inject constructor(
                                         playlist.images.firstOrNull()?.url,
                                         playlist.name,
                                         resources.getString(R.string.playlist),
-                                        playlist.owner.displayName
+                                        playlist.owner.displayName ?: "Unknown"
                                     ) }
                             }
                             _playlists.emit(items)
