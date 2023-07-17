@@ -17,13 +17,12 @@ class ApiAuthenticator(
     private val authRepository: Lazy<AuthRepository>, private val preferenceHelper: PreferenceHelper
 ) : Authenticator {
 
-    private var accessToken = preferenceHelper.getString(PreferenceKeys.ACCESS_TOKEN, "")
-
     override fun authenticate(route: Route?, response: Response): Request? {
         // If Authorization token isn't present then provide access
         // token or try to generate new Authorization token if current
         // is expired.
         return if (response.request.headers["Authorization"] == null || regenerateToken()) {
+            val accessToken = preferenceHelper.getString(PreferenceKeys.ACCESS_TOKEN, "")
             response.request.newBuilder().header("Authorization", "Bearer $accessToken").build()
         } else {
             null
@@ -48,7 +47,6 @@ class ApiAuthenticator(
                                 Calendar.getInstance().get(Calendar.SECOND) + data.expireTime
                             )
                         }
-                        accessToken = data.accessToken
                         true
                     }
 
