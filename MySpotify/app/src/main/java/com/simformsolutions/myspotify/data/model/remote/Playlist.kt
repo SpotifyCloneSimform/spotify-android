@@ -28,3 +28,8 @@ data class PlaylistItems(
 data class PlaylistTrack(
     @SerializedName("track") val track: Track
 )
+
+data class FeaturedPlaylist(
+    @SerializedName("message") val message: String,
+    @SerializedName("playlists") val playlists: MediaItems<Playlist>,
+)

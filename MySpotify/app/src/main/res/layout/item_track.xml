@@ -6,11 +6,9 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
-            name="searchItem"
-            type="com.simformsolutions.myspotify.data.model.local.SearchItem" />
+            name="track"
+            type="com.simformsolutions.myspotify.data.model.local.TrackItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +26,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:imageUrl="@{ searchItem.image }"
+            bind:imageUrl="@{ track.image }"
             tools:srcCompat="@drawable/albums" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -36,16 +34,13 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_12"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{ searchItem.title }"
+            android:text="@{ track.title }"
             android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toTopOf="@id/txtDescription"
-            app:layout_constraintEnd_toStartOf="@id/btnMenu"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imgCategory"
             app:layout_constraintTop_toTopOf="@id/imgCategory"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_goneMarginEnd="@dimen/dp_16"
             tools:text="Podcasts" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -55,30 +50,15 @@
             android:layout_marginStart="@dimen/dp_12"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{ @string/search_item_description(searchItem.type, searchItem.artists) }"
+            android:text="@{ track.description }"
             android:textColor="?android:attr/textColorHint"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="@id/imgCategory"
-            app:layout_constraintEnd_toStartOf="@id/btnMenu"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/imgCategory"
             app:layout_constraintTop_toBottomOf="@id/txtTitle"
-            app:layout_goneMarginEnd="@dimen/dp_16"
             tools:text="Description" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMenu"
-            style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_0"
-            android:visibility="@{ searchItem.hasMenu ? View.VISIBLE : View.GONE }"
-            app:backgroundTint="@android:color/transparent"
-            app:icon="@drawable/ic_menu_24"
-            app:iconSize="@dimen/dp_24"
-            app:iconTint="?android:attr/textColorSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
