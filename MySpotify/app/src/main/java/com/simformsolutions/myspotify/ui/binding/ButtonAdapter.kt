@@ -17,7 +17,5 @@ fun MaterialButton.setCheckedListener(attrChange: InverseBindingListener) {
     }
 }
 
-
-
 @InverseBindingAdapter(attribute = "android:checked")
 fun MaterialButton.doChecked(): Boolean = isChecked
