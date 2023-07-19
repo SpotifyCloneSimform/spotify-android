@@ -79,14 +79,14 @@ class UserLibraryViewModel @Inject constructor(
                                         ?: "", LibraryItemType.ALBUM, item.album.id
                                 )
                             }
-                            _isLoading.emit(false)
+
                             _libraryItems.emit(data)
                         }
                     }
 
                     is Resource.Error -> {}
                     is Resource.Loading -> {
-                        _isLoading.emit(true)
+
                     }
                 }
             }
@@ -105,15 +105,13 @@ class UserLibraryViewModel @Inject constructor(
                                     artist.id,
                                 )
                             }
-                            _isLoading.emit(false)
+
                             _libraryItems.emit(data)
                         }
                     }
 
                     is Resource.Error -> {}
-                    is Resource.Loading -> {
-                        _isLoading.emit(true)
-                    }
+                    is Resource.Loading -> {}
                 }
             }
         }
@@ -137,15 +135,12 @@ class UserLibraryViewModel @Inject constructor(
                                     playlist.id
                                 )
                             }
-                            _isLoading.emit(false)
                             _temp.emit(data)
                         }
                     }
 
                     is Resource.Error -> {}
-                    is Resource.Loading -> {
-                        _isLoading.emit(true)
-                    }
+                    is Resource.Loading -> {}
                 }
             }
         }

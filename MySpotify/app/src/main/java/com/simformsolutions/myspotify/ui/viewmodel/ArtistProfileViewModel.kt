@@ -41,6 +41,7 @@ class ArtistProfileViewModel @Inject constructor(
                 artistProfileRepository.getArtistProfile(artistId).collectLatest { resource ->
                     when (resource) {
                         is Resource.Success -> {
+                            _isLoading.emit(false)
                             resource.data?.let { artist ->
                                 _artistProfile.emit(artist)
                             }
@@ -70,6 +71,7 @@ class ArtistProfileViewModel @Inject constructor(
                                         track.durationMs
                                     )
                                 }
+                                _isLoading.emit(false)
                                 data?.let { _topTracks.emit(data) }
                             }
                         }
@@ -86,6 +88,7 @@ class ArtistProfileViewModel @Inject constructor(
                 artistProfileRepository.getRelatedArtist(artistId).collectLatest { resource ->
                     when (resource) {
                         is Resource.Success -> {
+                            _isLoading.emit(false)
                             resource.data?.let { artists ->
                                 _relatedArtist.emit(artists)
                             }

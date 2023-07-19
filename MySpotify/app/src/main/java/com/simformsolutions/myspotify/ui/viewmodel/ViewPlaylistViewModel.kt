@@ -63,6 +63,7 @@ class ViewPlaylistViewModel @Inject constructor(
                             }
                             songData?.let { songData ->
                                 _playlistsSongs.value = null
+                                _isLoading.emit(false)
                                 _playlistsSongs.emit(
                                     DisplaySong(
                                         ItemType.PLAYLIST,
@@ -99,7 +100,7 @@ class ViewPlaylistViewModel @Inject constructor(
                                 val artist = item.artists.joinToString(", ") { it.name }
                                 DisplaySongData(item.name, artist, "", LibraryItemType.ALBUM, item.id, item.durationMs)
                             }
-
+                            _isLoading.emit(false)
                             _playlistsSongs.value = null
                             _playlistsSongs.emit(DisplaySong(ItemType.ALBUM, albumSong.images.firstOrNull()?.url, albumSong.name, albumSong.artists.firstOrNull()?.name, songData))
                             _albumFooterView.emit(albumSong.artists.firstOrNull()?.id?.let {
@@ -130,6 +131,7 @@ class ViewPlaylistViewModel @Inject constructor(
                     }
 
                     is Resource.Success -> {
+                        _isLoading.emit(false)
                         resource.data?.let {
                             Log.d("artist", it.toString())
                             _ablumArtist.emit(it)

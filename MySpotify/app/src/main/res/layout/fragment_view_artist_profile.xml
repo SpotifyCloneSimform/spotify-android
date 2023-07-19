@@ -34,7 +34,7 @@
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:indicatorColor="?attr/colorSecondary"
+                app:indicatorColor="?attr/colorAccent"
                 android:indeterminateOnly="true"
                 android:visibility="@{ viewModel.isLoading() ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"

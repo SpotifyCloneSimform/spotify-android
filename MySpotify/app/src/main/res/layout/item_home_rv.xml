@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             tools:text="@{ title }"
             android:paddingStart="@dimen/dp_15"
-            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="@dimen/sp_20"
             app:layout_constraintStart_toStartOf="parent"

@@ -15,6 +15,7 @@ class ArtistProfileRepository(
 ): BaseRepository() {
 
     suspend fun getArtistProfile(artistId: String) = flow<Resource<Artist>> {
+        emit(Resource.Loading())
         artistProfileService.getArtistProfile(artistId).let { response ->
             val resource = handleResponse(response)
             emit(resource)
@@ -22,6 +23,7 @@ class ArtistProfileRepository(
     }.flowOn(Dispatchers.IO)
 
     suspend fun getArtistTopTracks(artistId: String) = flow<Resource<TopTracks>> {
+        emit(Resource.Loading())
         artistProfileService.getArtistTopTracks(artistId).let { response ->
             val resource = handleResponse(response)
             emit(resource)
@@ -29,6 +31,7 @@ class ArtistProfileRepository(
     }.flowOn(Dispatchers.IO)
 
     suspend fun getRelatedArtist(artistId: String) = flow<Resource<RelatedArtist>> {
+        emit(Resource.Loading())
         artistProfileService.getRelatedArtists(artistId).let { response ->
             val resource = handleResponse(response)
             emit(resource)
