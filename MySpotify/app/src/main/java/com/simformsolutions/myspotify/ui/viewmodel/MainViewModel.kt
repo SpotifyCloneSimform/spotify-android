@@ -27,12 +27,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun clearSubtitle() {
-        viewModelScope.launch {
-            _subtitle.emit("")
-        }
-    }
-
     fun updateToolbarColor(color: Int?) {
         viewModelScope.launch {
             _toolbarColor.emit(color)

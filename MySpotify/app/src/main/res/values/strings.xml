@@ -28,4 +28,8 @@
     <string name="all_episodes">All Episodes</string>
     <string name="see_more">See more</string>
     <string name="library">Library</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_night">Good Night</string>
+    <string name="good_evening">Good Evening</string>
 </resources>

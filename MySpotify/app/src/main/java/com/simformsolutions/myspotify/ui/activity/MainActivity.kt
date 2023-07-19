@@ -41,7 +41,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             launch {
                 viewModel.toolbarColor.collectLatest { color ->
-                    binding.toolbar.setBackgroundColor(color ?: getThemeColor(com.google.android.material.R.attr.backgroundColor))
+                    binding.toolbar.setBackgroundColor(
+                        color ?: getThemeColor(com.google.android.material.R.attr.backgroundColor)
+                    )
                 }
             }
         }
