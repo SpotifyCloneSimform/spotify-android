@@ -2,22 +2,14 @@ package com.simformsolutions.myspotify.ui.adapter
 
 import android.annotation.SuppressLint
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
 import com.simformsolutions.myspotify.R
-import com.simformsolutions.myspotify.data.model.local.LibraryDisplay
-import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.model.remote.Episode
 import com.simformsolutions.myspotify.databinding.ItemShowEpisodesBinding
 import com.simformsolutions.myspotify.ui.base.BaseAdapter
 import com.simformsolutions.myspotify.ui.binding.bindImage
 import java.util.concurrent.TimeUnit
 
-enum class ViewType {
-    DATA,
-    LOADING
-}
-
-class EpisodesAdapter(var publisherName: String = ""): BaseAdapter<Episode>() {
+class EpisodesAdapter(var publisherName: String = "") : BaseAdapter<Episode>() {
 
     override fun getLayoutId(viewType: Int) = R.layout.item_show_episodes
 
@@ -30,13 +22,16 @@ class EpisodesAdapter(var publisherName: String = ""): BaseAdapter<Episode>() {
     ) {
         (binding as? ItemShowEpisodesBinding)?.let {
 
-            val HH: Long = TimeUnit.MILLISECONDS.toHours(data.durationMs?.toLong() ?: 0)
-            val MM: Long = TimeUnit.MILLISECONDS.toMinutes(data.durationMs?.toLong() ?: 0) % 60
-            val SS: Long = TimeUnit.MILLISECONDS.toSeconds(data.durationMs?.toLong() ?: 0) % 60
+            val HH: Long = TimeUnit.MILLISECONDS.toHours(data.durationMs.toLong())
+            val MM: Long = TimeUnit.MILLISECONDS.toMinutes(data.durationMs.toLong()) % 60
+            val SS: Long = TimeUnit.MILLISECONDS.toSeconds(data.durationMs.toLong()) % 60
 
             binding.episode = data
-            binding.tvDurtion.text = String.format("%02d:%02d:%02d", HH, MM, SS);
-            binding.imgThumbnail.bindImage(data.images.firstOrNull()?.url, binding.root.context.getDrawable(R.drawable.baseline_music_note_24))
+            binding.tvDurtion.text = String.format("%02d:%02d:%02d", HH, MM, SS)
+            binding.imgThumbnail.bindImage(
+                data.images.firstOrNull()?.url,
+                binding.root.context.getDrawable(R.drawable.baseline_music_note_24)
+            )
             binding.tvShowName.text = publisherName
         }
     }
