@@ -1,9 +1,9 @@
 package com.simformsolutions.myspotify.ui.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.model.local.HomeData
 import com.simformsolutions.myspotify.data.model.local.HomeDisplayData
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.repository.HomeRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
 import com.simformsolutions.myspotify.utils.Resource
@@ -115,7 +115,7 @@ class HomeViewModel @Inject constructor(
                     is Resource.Success -> {
                         resource.data.let { data ->
                             val data = data?.playlists?.items?.mapNotNull { item ->
-                                item.images.firstOrNull()?.url?.let {
+                                item?.images?.firstOrNull()?.url?.let {
                                     HomeDisplayData(
                                         it,
                                         item.name,

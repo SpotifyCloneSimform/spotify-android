@@ -20,16 +20,11 @@ data class Playlist(
     @SerializedName("uri") val uri: String
 )
 
-data class PlaylistItems(
-    @SerializedName("message") val message: String,
-    @SerializedName("playlists") val playlists: MediaItems<Playlist>
-)
-
 data class PlaylistTrack(
     @SerializedName("track") val track: Track
 )
 
-data class FeaturedPlaylist(
+data class PlaylistItems(
     @SerializedName("message") val message: String,
-    @SerializedName("playlists") val playlists: MediaItems<Playlist>,
+    @SerializedName("playlists") val playlists: MediaItems<Playlist?>,
 )
