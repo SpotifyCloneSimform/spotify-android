@@ -1,11 +1,6 @@
 package com.simformsolutions.myspotify.ui.fragment
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,14 +10,12 @@ import androidx.navigation.fragment.navArgs
 import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.data.model.remote.Artist
 import com.simformsolutions.myspotify.databinding.FragmentViewArtistProfileBinding
-import com.simformsolutions.myspotify.databinding.FragmentViewPlaylistBinding
 import com.simformsolutions.myspotify.listener.ItemClickListener
 import com.simformsolutions.myspotify.ui.adapter.ArtistTopTrackAdapter
 import com.simformsolutions.myspotify.ui.adapter.RelatedArtistAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
 import com.simformsolutions.myspotify.ui.binding.bindImage
 import com.simformsolutions.myspotify.ui.viewmodel.ArtistProfileViewModel
-import com.simformsolutions.myspotify.ui.viewmodel.HomeViewModel
 import com.simformsolutions.myspotify.utils.Formatter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

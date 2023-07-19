@@ -42,7 +42,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 launch {
                     viewModel.errorMessage.collectLatest {
-                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        if (it.isNotEmpty()) {
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
                 launch {

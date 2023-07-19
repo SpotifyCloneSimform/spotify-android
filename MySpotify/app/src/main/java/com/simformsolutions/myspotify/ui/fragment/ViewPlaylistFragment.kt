@@ -1,5 +1,6 @@
 package com.simformsolutions.myspotify.ui.fragment
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,6 +34,7 @@ class ViewPlaylistFragment : BaseFragment<FragmentViewPlaylistBinding, ViewPlayl
     }
 
     private fun setupUI() {
+        binding.btnPlay.visibility = View.GONE
         binding.rvSong.adapter = adapter
         when (args.type) {
             LibraryItemType.PLAYLIST -> {
@@ -55,6 +57,7 @@ class ViewPlaylistFragment : BaseFragment<FragmentViewPlaylistBinding, ViewPlayl
                     viewModel.playlistsSongs.collectLatest { displaySongs ->
                         binding.playlistInfo = displaySongs
                         displaySongs?.data?.let {
+                            binding.btnPlay.visibility = View.VISIBLE
                             adapter.submitList(it)
                         }
                     }

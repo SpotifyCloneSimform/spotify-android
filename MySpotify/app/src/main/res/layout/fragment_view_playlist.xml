@@ -38,6 +38,18 @@
             android:background="@color/black"
             tools:context=".ui.fragment.HomeFragment">
 
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorColor="?attr/colorSecondary"
+                android:indeterminateOnly="true"
+                android:layout_marginTop="@dimen/dp_300"
+                android:visibility="@{ viewModel.isLoading() ? View.VISIBLE : View.GONE }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/imgPlaylist"
                 android:layout_width="150dp"
@@ -118,7 +130,7 @@
                 style="@style/TextViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_2"
                 android:text="@{ `Total Songs : `+additionInfo.totalSongs }"
                 android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
                 app:layout_constraintStart_toStartOf="@id/tvReleaseDate"
@@ -129,21 +141,25 @@
                 android:id="@+id/artistImage"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_12"
                 android:scaleType="fitXY"
                 android:src="@drawable/albums"
                 android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
                 app:layout_constraintStart_toStartOf="@id/tvTotalSongs"
                 app:layout_constraintTop_toBottomOf="@id/tvTotalSongs"
                 bind:imageUrl="@{ playlistInfo.images }"
-                bind:isRounded="@{ true }" />
+                bind:isRounded="@{ true }"
+                android:contentDescription="@string/thumbnail" />
 
             <TextView
                 android:id="@+id/tvArtistName"
                 style="@style/TextViewTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginStart="@dimen/dp_12"
                 android:text="@{ playlistInfo.owner }"
                 android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="@id/artistImage"
@@ -156,15 +172,17 @@
                 style="@style/TextViewTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_12"
                 android:layout_marginBottom="@dimen/dp_16"
                 android:text="@{ additionInfo.copyRight }"
                 android:visibility="@{ playlistInfo.type == ItemType.ALBUM ? View.VISIBLE : View.GONE }"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/artistImage"
+                android:textColor="?android:attr/textColorSecondary"
                 app:layout_constraintTop_toBottomOf="@id/artistImage"
-                tools:text="CopyrightCopyrightCopyrightCopyright" />
+                tools:text="Copyright"
+                tools:targetApi="n_mr1" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

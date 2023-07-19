@@ -53,6 +53,7 @@ class HomeViewModel @Inject constructor(
                                     )
                                 }
                             }
+                            _isLoading.emit(false)
                             data?.let { data ->
                                 _playlists.emit(_playlists.value + HomeData("Your playlist", data))
                             }
@@ -89,6 +90,7 @@ class HomeViewModel @Inject constructor(
                                     )
                                 }
                             }
+                            _isLoading.emit(false)
                             data?.let { data ->
                                 _playlists.emit(_playlists.value + HomeData("Your Songs", data))
                             }
@@ -124,6 +126,7 @@ class HomeViewModel @Inject constructor(
                                     )
                                 }
                             }
+                            _isLoading.emit(false)
                             data?.let { data ->
                                 val message = resource.data?.message
                                 _playlists.emit(

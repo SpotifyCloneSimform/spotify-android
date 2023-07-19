@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:padding="@dimen/dp_8">
+        android:paddingVertical="@dimen/dp_8">
 
         <ImageView
             android:id="@+id/imgThumbnail"
@@ -22,6 +22,7 @@
             android:layout_height="48dp"
             android:contentDescription="@string/thumbnail"
             android:scaleType="fitXY"
+            android:layout_marginStart="@dimen/dp_16"
             android:visibility="@{ song.type == LibraryItemType.PLAYLIST ? View.VISIBLE : View.GONE }"
             bind:imageUrl="@{ song.image }"
             bind:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +48,7 @@
         <TextView
             android:id="@+id/artistName"
             style="@style/TextViewSubTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@{ song.artistsName }"
@@ -57,6 +58,7 @@
             bind:layout_constraintStart_toEndOf="@id/songName"
             bind:layout_constraintStart_toStartOf="@id/songName"
             bind:layout_constraintTop_toBottomOf="@id/songName"
+            android:ellipsize="end"
             tools:text="ArtistName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
