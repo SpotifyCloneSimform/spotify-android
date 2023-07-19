@@ -1,10 +1,9 @@
 package com.simformsolutions.myspotify.data.repository
 
-import com.simformsolutions.myspotify.data.model.remote.Album
+import com.simformsolutions.myspotify.data.model.remote.FeaturedPlaylist
 import com.simformsolutions.myspotify.data.model.remote.HomeAlbumItems
 import com.simformsolutions.myspotify.data.model.remote.MediaItems
 import com.simformsolutions.myspotify.data.model.remote.Playlist
-import com.simformsolutions.myspotify.data.model.remote.PlaylistItems
 import com.simformsolutions.myspotify.data.service.HomeService
 import com.simformsolutions.myspotify.ui.base.BaseRepository
 import com.simformsolutions.myspotify.utils.Resource
@@ -30,7 +29,7 @@ class HomeRepository(private val homeService: HomeService) : BaseRepository() {
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getFeaturedPlaylist() = flow<Resource<PlaylistItems>> {
+    suspend fun getFeaturedPlaylist() = flow<Resource<FeaturedPlaylist>> {
         emit(Resource.Loading())
         homeService.getFeaturedPlaylist().let { response ->
             val resource = handleResponse(response)

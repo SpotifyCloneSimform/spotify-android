@@ -80,10 +80,12 @@ class SearchHistoryViewModel @Inject constructor(
             val artists = track.artists.map { it.name }
             add(
                 SearchItem(
+                    track.id,
                     track.album.images.firstOrNull()?.url,
                     track.name,
                     resources.getString(R.string.track),
-                    artists.joinToString(", ")
+                    artists.joinToString(", "),
+                    true
                 )
             )
         }
@@ -92,6 +94,7 @@ class SearchHistoryViewModel @Inject constructor(
             val artist = playlist.owner.displayName
             add(
                 SearchItem(
+                    playlist.id,
                     playlist.images.firstOrNull()?.url,
                     playlist.name,
                     resources.getString(R.string.playlist),
@@ -104,6 +107,7 @@ class SearchHistoryViewModel @Inject constructor(
             val artists = album.artists.map { it.name }
             add(
                 SearchItem(
+                    album.id,
                     album.images.firstOrNull()?.url,
                     album.name,
                     resources.getString(R.string.album),

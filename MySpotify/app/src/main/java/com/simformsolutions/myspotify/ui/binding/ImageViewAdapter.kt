@@ -2,6 +2,7 @@ package com.simformsolutions.myspotify.ui.binding
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -24,4 +25,9 @@ fun ImageView.bindImage(
             )
         )
         .into(this)
+}
+
+@BindingAdapter("drawableResource")
+fun ImageView.setDrawableResource(@DrawableRes drawableResource: Int) {
+    setImageResource(drawableResource)
 }

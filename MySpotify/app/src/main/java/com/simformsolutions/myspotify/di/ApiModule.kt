@@ -9,6 +9,7 @@ import com.simformsolutions.myspotify.data.repository.AuthRepository
 import com.simformsolutions.myspotify.data.repository.HomeRepository
 import com.simformsolutions.myspotify.data.repository.PlaylistRepository
 import com.simformsolutions.myspotify.data.repository.SearchRepository
+import com.simformsolutions.myspotify.data.repository.TrackRepository
 import com.simformsolutions.myspotify.data.repository.UserLibraryRepository
 import com.simformsolutions.myspotify.data.repository.UserRepository
 import com.simformsolutions.myspotify.data.repository.ViewEpisodeRepository
@@ -17,6 +18,7 @@ import com.simformsolutions.myspotify.data.service.AuthService
 import com.simformsolutions.myspotify.data.service.HomeService
 import com.simformsolutions.myspotify.data.service.PlaylistService
 import com.simformsolutions.myspotify.data.service.SearchService
+import com.simformsolutions.myspotify.data.service.TrackService
 import com.simformsolutions.myspotify.data.service.UserLibraryService
 import com.simformsolutions.myspotify.data.service.UserService
 import com.simformsolutions.myspotify.data.service.ViewArtistProfileService
@@ -156,6 +158,11 @@ object ApiModule {
 
     @Singleton
     @Provides
+    fun providesTrackService(@Named(API_RETROFIT) retrofit: Retrofit): TrackService =
+        retrofit.create(TrackService::class.java)
+
+    @Singleton
+    @Provides
     fun providesAuthRepository(authService: AuthService): AuthRepository =
         AuthRepository(authService)
 
@@ -200,4 +207,9 @@ object ApiModule {
     @Provides
     fun providesViewEpisodeRepository(artistProfileService: ViewEpisodesService): ViewEpisodeRepository =
         ViewEpisodeRepository(artistProfileService)
+
+    @Singleton
+    @Provides
+    fun providesTrackRepository(trackService: TrackService): TrackRepository =
+        TrackRepository(trackService)
 }

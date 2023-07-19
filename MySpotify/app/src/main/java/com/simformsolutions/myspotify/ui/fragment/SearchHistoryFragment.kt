@@ -13,6 +13,7 @@ import com.simformsolutions.myspotify.databinding.FragmentSearchHistoryBinding
 import com.simformsolutions.myspotify.extentions.getThemeColor
 import com.simformsolutions.myspotify.ui.adapter.SearchAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
+import com.simformsolutions.myspotify.ui.dialog.TrackOptionsDialog
 import com.simformsolutions.myspotify.ui.viewmodel.MainViewModel
 import com.simformsolutions.myspotify.ui.viewmodel.SearchHistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,8 +61,17 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
 
     private fun setupUI() {
         activityViewModel.updateToolbarColor(requireActivity().getThemeColor(com.google.android.material.R.attr.colorSurface))
-        searchAdapter = SearchAdapter()
+        searchAdapter = SearchAdapter { item ->
+            showTrackOptions(item.id)
+        }
         binding.rvSearchHistory.adapter = searchAdapter
+    }
+
+    private fun showTrackOptions(trackId: String) {
+        val dialog = TrackOptionsDialog().apply {
+            this.trackId = trackId
+        }
+        dialog.show(childFragmentManager, TrackOptionsDialog.TAG)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = false
