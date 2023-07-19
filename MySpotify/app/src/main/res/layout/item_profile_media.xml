@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mediaItem"
+            type="com.simformsolutions.myspotify.data.model.local.ProfileMediaItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginVertical="@dimen/dp_8">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_marginStart="@dimen/dp_16"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:imageUrl="@{ mediaItem.image }"
+            bind:placeholder="@{ @drawable/ic_playlist_24 }"
+            tools:srcCompat="@drawable/ic_playlist_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:text="@{ mediaItem.title }"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@id/txtDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgCategory"
+            app:layout_constraintTop_toTopOf="@id/imgCategory"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Podcasts" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtDescription"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ @string/profile_item_description(mediaItem.followers, mediaItem.artists) }"
+            android:textColor="?android:attr/textColorHint"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/imgCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/imgCategory"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle"
+            tools:text="1 followers" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

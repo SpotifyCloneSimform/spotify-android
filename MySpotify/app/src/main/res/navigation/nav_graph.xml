@@ -3,22 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/searchFragment">
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/fragment_search">
+        android:label="@string/label_search"
+        tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_searchHistoryFragment"
             app:destination="@id/searchHistoryFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
 
     <fragment
+        tools:layout="@layout/fragment_search_history"
         android:id="@+id/searchHistoryFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchHistoryFragment"
-        android:label="SearchHistoryFragment" />
+        android:label="@string/label_search_history" />
+
+    <fragment
+        tools:layout="@layout/layout_profile"
+        android:id="@+id/userProfileFragment"
+        android:name="com.simformsolutions.myspotify.ui.fragment.UserProfileFragment"
+        android:label="@string/label_profile" />
 
     <fragment
         android:id="@+id/homeFragment"

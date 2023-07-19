@@ -3,6 +3,7 @@ package com.simformsolutions.myspotify.ui.viewmodel
 import androidx.lifecycle.viewModelScope
 import com.simformsolutions.myspotify.data.model.GrantType
 import com.simformsolutions.myspotify.data.repository.AuthRepository
+import com.simformsolutions.myspotify.data.repository.UserRepository
 import com.simformsolutions.myspotify.helper.PreferenceHelper
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
 import com.simformsolutions.myspotify.utils.AppConstants
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val userRepository: UserRepository,
     private val preferenceHelper: PreferenceHelper
 ) : BaseViewModel() {
 
@@ -59,6 +61,7 @@ class AuthViewModel @Inject constructor(
                                 }
                             }
                         }
+                        getUserProfile()
                         _isLoading.emit(false)
                         _authToken.emit(resource.data?.accessToken)
                     }
@@ -67,6 +70,16 @@ class AuthViewModel @Inject constructor(
                         _isLoading.emit(false)
                         resource.message?.let { _errorMessage.emit(it) }
                     }
+                }
+            }
+        }
+    }
+
+    private suspend fun getUserProfile() {
+        viewModelScope.launch {
+            userRepository.getAuthorizedUser().collectLatest { resource ->
+                resource.data?.id?.let { userId ->
+                    preferenceHelper.putString(PreferenceKeys.USER_ID, userId)
                 }
             }
         }

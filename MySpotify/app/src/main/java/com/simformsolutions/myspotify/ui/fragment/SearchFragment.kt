@@ -47,7 +47,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     
     private fun setupListener() {
         binding.btnSearch.setOnClickListener {
-            val destination = SearchFragmentDirections.actionSearchFragmentToSearchHistoryFragment()
+            val destination = SearchFragmentDirections.actionSearchFragmentToUserProfileFragment()
             findNavController().navigate(destination)
         }
     }

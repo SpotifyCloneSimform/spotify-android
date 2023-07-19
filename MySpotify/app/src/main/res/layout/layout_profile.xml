@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userProfile"
+            type="com.simformsolutions.myspotify.data.model.remote.UserProfile" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:layout_margin="@dimen/dp_16"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Round"
+            bind:imageUrl="@{ userProfile.images[0].url }"
+            tools:srcCompat="@drawable/albums" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtName"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{ userProfile.displayName }"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/txtEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toTopOf="@id/imgProfile"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Krunal Patel" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtEmail"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_6"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ userProfile.email }"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toTopOf="@id/txtFollowers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toBottomOf="@id/txtName"
+            tools:text="kbpatel5802@gmail.com" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtFollowers"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_6"
+            android:text="@{ @string/followers(userProfile.followers.total) }"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/imgProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgProfile"
+            app:layout_constraintTop_toBottomOf="@id/txtEmail"
+            tools:text="0 followers" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
