@@ -14,9 +14,6 @@
             android:id="@+id/action_searchFragment_to_searchHistoryFragment"
             app:destination="@id/searchHistoryFragment" />
         <action
-            android:id="@+id/action_searchFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-        <action
             android:id="@+id/action_searchFragment_to_categoryPlaylistFragment"
             app:destination="@id/categoryPlaylistFragment" />
     </fragment>
@@ -29,13 +26,23 @@
         <action
             android:id="@+id/action_searchHistoryFragment_to_nowPlayingFragment"
             app:destination="@id/nowPlayingFragment" />
+        <action
+            android:id="@+id/action_searchHistoryFragment_to_viewArtistProfile"
+            app:destination="@id/viewArtistProfile" />
+        <action
+            android:id="@+id/action_searchHistoryFragment_to_viewPlaylistFragment"
+            app:destination="@id/viewPlaylistFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.UserProfileFragment"
         android:label="@string/label_profile"
-        tools:layout="@layout/layout_profile" />
+        tools:layout="@layout/layout_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_viewPlaylistFragment"
+            app:destination="@id/viewPlaylistFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -44,6 +51,9 @@
         <action
             android:id="@+id/action_homeFragment_to_viewPlaylistFragment"
             app:destination="@id/viewPlaylistFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
 
     <fragment
@@ -56,6 +66,9 @@
         <argument
             android:name="type"
             app:argType=".data.model.local.LibraryItemType" />
+        <action
+            android:id="@+id/action_viewPlaylistFragment_to_nowPlayingFragment"
+            app:destination="@id/nowPlayingFragment" />
     </fragment>
 
     <fragment
@@ -77,6 +90,7 @@
     <fragment
         android:id="@+id/viewArtistProfile"
         android:name="com.simformsolutions.myspotify.ui.fragment.ViewArtistProfileFragment"
+        android:label="@string/Artist"
         tools:layout="@layout/fragment_view_artist_profile">
         <argument
             android:name="artistId"
@@ -84,6 +98,9 @@
         <action
             android:id="@+id/action_viewArtistProfile_self"
             app:destination="@id/viewArtistProfile" />
+        <action
+            android:id="@+id/action_viewArtistProfile_to_nowPlayingFragment"
+            app:destination="@id/nowPlayingFragment" />
     </fragment>
 
     <fragment
@@ -106,12 +123,14 @@
         <argument
             android:name="categoryName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_categoryPlaylistFragment_to_viewPlaylistFragment"
+            app:destination="@id/viewPlaylistFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/nowPlayingFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.NowPlayingFragment"
-        android:label="NowPlayingFragment"
         tools:layout="@layout/fragment_now_playing">
         <argument
             android:name="trackId"

@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.data.model.local.ItemType
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.model.local.SearchItem
 import com.simformsolutions.myspotify.databinding.FragmentSearchHistoryBinding
 import com.simformsolutions.myspotify.extentions.getThemeColor
@@ -68,11 +69,7 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
         searchAdapter = SearchAdapter { item ->
             showTrackOptions(item.id)
         }
-        searchAdapter.itemClickListener = object : ItemClickListener<SearchItem> {
-            override fun onClick(item: SearchItem, position: Int) {
-                playTrack(item.id)
-            }
-        }
+        setupItemClickNavigation()
         binding.rvSearchHistory.adapter = searchAdapter
     }
 
@@ -83,9 +80,35 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
         dialog.show(childFragmentManager, TrackOptionsDialog.TAG)
     }
 
-    private fun playTrack(trackId: String) {
-        val destination = SearchHistoryFragmentDirections.actionSearchHistoryFragmentToNowPlayingFragment(trackId, trackId, ItemType.TRACK)
-        findNavController().navigate(destination)
+    private fun setupItemClickNavigation() {
+        searchAdapter.itemClickListener = object : ItemClickListener<SearchItem> {
+            override fun onClick(item: SearchItem, position: Int) {
+                val destination = when (item.type) {
+                    getString(R.string.playlist) -> SearchHistoryFragmentDirections.actionSearchHistoryFragmentToViewPlaylistFragment(
+                        item.id,
+                        LibraryItemType.PLAYLIST
+                    )
+
+                    getString(R.string.track) -> SearchHistoryFragmentDirections.actionSearchHistoryFragmentToNowPlayingFragment(
+                        item.id,
+                        item.id,
+                        ItemType.TRACK
+                    )
+
+                    getString(R.string.album) -> SearchHistoryFragmentDirections.actionSearchHistoryFragmentToViewPlaylistFragment(
+                        item.id,
+                        LibraryItemType.ALBUM
+                    )
+
+                    getString(R.string.artist) -> SearchHistoryFragmentDirections.actionSearchHistoryFragmentToViewArtistProfile(
+                        item.id
+                    )
+
+                    else -> null
+                }
+                destination?.let { findNavController().navigate(it) }
+            }
+        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = false

@@ -1,5 +1,8 @@
 package com.simformsolutions.myspotify.data.model.local
 
+import android.content.Context
+import com.simformsolutions.myspotify.R
+
 data class DisplaySong(
     val type: ItemType?,
     val images: String?,
@@ -23,7 +26,7 @@ data class DisplayAlbumFooterView(
     val artistId: String = "",
     val releaseDate: String = "",
     val totalSongs: Int = 0,
-    val copyRight: String = "" ,
+    val copyRight: String = "",
     val artistImage: String = ""
 )
 
@@ -32,5 +35,16 @@ enum class ItemType {
     ALBUM,
     TRACK,
     ARTIST,
-    PODCAST,
+    PODCAST;
+
+    fun getLocalizedName(context: Context): String =
+        context.getString(
+            when (this) {
+                PLAYLIST -> R.string.playlist
+                ALBUM -> R.string.album
+                TRACK -> R.string.track
+                ARTIST -> R.string.artist
+                PODCAST -> R.string.podcast
+            }
+        )
 }

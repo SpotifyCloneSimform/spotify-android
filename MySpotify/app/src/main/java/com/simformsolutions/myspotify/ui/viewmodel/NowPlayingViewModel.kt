@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.simformsolutions.myspotify.data.model.local.ItemType
 import com.simformsolutions.myspotify.data.model.local.TrackItem
 import com.simformsolutions.myspotify.data.repository.AlbumRepository
+import com.simformsolutions.myspotify.data.repository.ArtistProfileRepository
 import com.simformsolutions.myspotify.data.repository.PlaylistRepository
 import com.simformsolutions.myspotify.data.repository.TrackRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
@@ -21,10 +22,14 @@ class NowPlayingViewModel @Inject constructor(
     private val trackRepository: TrackRepository,
     private val playlistRepository: PlaylistRepository,
     private val albumRepository: AlbumRepository,
+    private val artistProfileRepository: ArtistProfileRepository
 ) : BaseViewModel() {
 
     private val _track = MutableStateFlow<TrackItem?>(null)
     val track = _track.asStateFlow()
+
+    private val _name = MutableStateFlow<String>("")
+    val name = _name.asStateFlow()
 
     val isShuffle = MutableStateFlow(false)
     private val trackQueue = mutableListOf<TrackItem>()
@@ -35,6 +40,7 @@ class NowPlayingViewModel @Inject constructor(
             ItemType.PLAYLIST -> getByPlaylist(trackId, id)
             ItemType.ALBUM -> getByAlbum(trackId, id)
             ItemType.TRACK -> getByTrack(id)
+            ItemType.ARTIST -> getArtistTopTracks(trackId, id)
             else -> {}
         }
     }
@@ -54,6 +60,7 @@ class NowPlayingViewModel @Inject constructor(
             playlistRepository.getPlaylist(playlistId).collectLatest { resource ->
                 if (resource is Resource.Success) {
                     val items = resource.data?.tracks?.items?.map { playlist ->
+                        _name.emit(resource.data.name)
                         playlist.track.let { track ->
                             val artists = track.artists.joinToString(", ") { it.name }
                             TrackItem(
@@ -80,6 +87,7 @@ class NowPlayingViewModel @Inject constructor(
         viewModelScope.launch {
             albumRepository.getAlbum(albumId).collectLatest { resource ->
                 if (resource is Resource.Success) {
+                    resource.data?.name?.let { _name.emit(it) }
                     val items = resource.data?.tracks?.items?.map { track ->
                         val artists = track.artists.joinToString(", ") { it.name }
                         TrackItem(
@@ -95,6 +103,44 @@ class NowPlayingViewModel @Inject constructor(
                         trackQueue.addAll(it)
                         currentTrackPosition = it.indexOfFirst { item -> item.id == trackId }
                         updateCurrentTrack()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getArtistTopTracks(trackId: String, artistId: String) {
+        getArtistInfo(artistId)
+        viewModelScope.launch {
+            artistProfileRepository.getArtistTopTracks(artistId).collectLatest { resource ->
+                if (resource is Resource.Success) {
+                    val items = resource.data?.track?.map { track ->
+                        val artists = track.artists.joinToString(", ") { it.name }
+                        TrackItem(
+                            track.id,
+                            track.album.images.firstOrNull()?.url,
+                            track.name,
+                            "Track",
+                            artists
+                        ).also { updateLike(it) }
+                    }
+                    items?.let {
+                        trackQueue.clear()
+                        trackQueue.addAll(it)
+                        currentTrackPosition = it.indexOfFirst { item -> item.id == trackId }
+                        updateCurrentTrack()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getArtistInfo(artistId: String) {
+        viewModelScope.launch {
+            artistProfileRepository.getArtistProfile(artistId).collectLatest { resource ->
+                if (resource is Resource.Success) {
+                    resource.data?.name?.let { name ->
+                        _name.emit(name)
                     }
                 }
             }

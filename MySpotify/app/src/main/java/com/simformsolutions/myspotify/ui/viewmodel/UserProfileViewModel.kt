@@ -21,7 +21,7 @@ class UserProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val playlistRepository: PlaylistRepository,
     preferenceHelper: PreferenceHelper
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -77,7 +77,9 @@ class UserProfileViewModel @Inject constructor(
                             resource.data?.items?.filter { it.owner.id == userId }
                                 ?.forEach { playlist ->
                                     val item = ProfileMediaItem(
-                                        playlist.images.firstOrNull()?.url, playlist.name
+                                        playlist.id,
+                                        playlist.images.firstOrNull()?.url,
+                                        playlist.name
                                     )
                                     updatePlaylistDetails(playlist.id, item)
                                     add(item)

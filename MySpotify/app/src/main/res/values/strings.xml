@@ -37,4 +37,7 @@
     <string name="good_afternoon">Good Afternoon</string>
     <string name="good_night">Good Night</string>
     <string name="good_evening">Good Evening</string>
+    <string name="Artist">Artist</string>
+    <string name="playing_from">Playing from %1$s</string>
+    <string name="profile">Profile</string>
 </resources>

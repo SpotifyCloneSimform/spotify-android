@@ -5,6 +5,7 @@ import androidx.databinding.Bindable
 import com.simformsolutions.myspotify.BR
 
 data class ProfileMediaItem(
+    val playlistId: String,
     val image: String?,
     val title: String,
     private var _artists: String? = null,
