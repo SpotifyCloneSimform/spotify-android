@@ -15,5 +15,6 @@ data class Album(
     @SerializedName("release_date_precision") val releaseDatePrecision: String,
     @SerializedName("total_tracks") val totalTracks: Int,
     @SerializedName("type") val type: String,
-    @SerializedName("uri") val uri: String
+    @SerializedName("uri") val uri: String,
+    @SerializedName("tracks") val tracks: MediaItems<Track>
 )

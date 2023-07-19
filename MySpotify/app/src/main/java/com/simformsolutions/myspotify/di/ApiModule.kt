@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.simformsolutions.myspotify.BuildConfig
+import com.simformsolutions.myspotify.data.repository.AlbumRepository
 import com.simformsolutions.myspotify.data.repository.ArtistProfileRepository
 import com.simformsolutions.myspotify.data.repository.AuthRepository
 import com.simformsolutions.myspotify.data.repository.HomeRepository
@@ -14,6 +15,7 @@ import com.simformsolutions.myspotify.data.repository.UserLibraryRepository
 import com.simformsolutions.myspotify.data.repository.UserRepository
 import com.simformsolutions.myspotify.data.repository.ViewEpisodeRepository
 import com.simformsolutions.myspotify.data.repository.ViewPlaylistRepository
+import com.simformsolutions.myspotify.data.service.AlbumService
 import com.simformsolutions.myspotify.data.service.AuthService
 import com.simformsolutions.myspotify.data.service.HomeService
 import com.simformsolutions.myspotify.data.service.PlaylistService
@@ -163,6 +165,11 @@ object ApiModule {
 
     @Singleton
     @Provides
+    fun providesAlbumService(@Named(API_RETROFIT) retrofit: Retrofit): AlbumService =
+        retrofit.create(AlbumService::class.java)
+
+    @Singleton
+    @Provides
     fun providesAuthRepository(authService: AuthService): AuthRepository =
         AuthRepository(authService)
 
@@ -185,7 +192,6 @@ object ApiModule {
     @Provides
     fun providesHomeRepository(homeService: HomeService): HomeRepository =
         HomeRepository(homeService)
-
 
     @Singleton
     @Provides
@@ -212,4 +218,9 @@ object ApiModule {
     @Provides
     fun providesTrackRepository(trackService: TrackService): TrackRepository =
         TrackRepository(trackService)
+
+    @Singleton
+    @Provides
+    fun providesAlbumRepository(albumService: AlbumService): AlbumRepository =
+        AlbumRepository(albumService)
 }

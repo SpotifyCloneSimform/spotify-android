@@ -91,7 +91,7 @@ class SearchHistoryViewModel @Inject constructor(
         }
 
         data.playlists?.items?.forEach { playlist ->
-            val artist = playlist.owner.displayName
+            val artist = playlist.owner.displayName ?: "Unknown"
             add(
                 SearchItem(
                     playlist.id,

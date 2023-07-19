@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.simformsolutions.myspotify.ui.viewmodel.NowPlayingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        tools:context=".ui.fragment.NowPlayingFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideStart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dp_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dp_24" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgThumbnail"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/txtTitle"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/albums"
+            bind:imageUrl="@{ viewModel.track.image }" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ viewModel.track.title }"
+            android:textSize="@dimen/sp_20"
+            app:layout_constraintBottom_toTopOf="@id/txtArtist"
+            app:layout_constraintEnd_toStartOf="@id/btnLike"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            tools:text="Gorgeous" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtArtist"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{ viewModel.track.artists }"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintBottom_toTopOf="@id/sliderTime"
+            app:layout_constraintEnd_toStartOf="@id/btnLike"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            tools:text="Taylor Swift" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLike"
+            style="@style/PrimaryIconButton"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:checkable="true"
+            android:checked="@{ viewModel.track.isLiked ? true : false}"
+            app:icon="@drawable/selector_like"
+            app:iconTint="@color/selector_heart_tint"
+            app:layout_constraintBottom_toBottomOf="@id/txtArtist"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"
+            app:layout_constraintTop_toTopOf="@id/txtTitle" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderTime"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dp_16"
+            android:value="0.3"
+            app:layout_constraintBottom_toTopOf="@id/btnPlayPause"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:thumbRadius="@dimen/dp_6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShuffle"
+            style="@style/PrimaryIconButton"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:checkable="true"
+            android:checked="@={ viewModel.isShuffle }"
+            app:icon="@drawable/ic_shuffle_24"
+            app:iconSize="@dimen/dp_24"
+            app:iconTint="@color/selector_active_tint"
+            app:layout_constraintBaseline_toBaselineOf="@id/btnPlayPause"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/guideStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrevious"
+            style="@style/PrimaryIconButton"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:onClick="@{ () -> viewModel.previousTrack() }"
+            app:icon="@drawable/ic_previous_24"
+            app:layout_constraintBaseline_toBaselineOf="@id/btnPlayPause"
+            app:layout_constraintEnd_toStartOf="@id/btnPlayPause"
+            app:layout_constraintStart_toEndOf="@id/btnShuffle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPlayPause"
+            style="@style/PrimaryIconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_24"
+            android:checkable="true"
+            android:checked="true"
+            android:padding="@dimen/dp_0"
+            app:icon="@drawable/selector_play_pause"
+            app:iconSize="@dimen/dp_56"
+            app:iconTint="?attr/colorOnBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnNext"
+            app:layout_constraintStart_toEndOf="@id/btnPrevious" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            style="@style/PrimaryIconButton"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:onClick="@{ () -> viewModel.nextTrack() }"
+            app:icon="@drawable/ic_next_24"
+            app:layout_constraintBaseline_toBaselineOf="@id/btnPlayPause"
+            app:layout_constraintEnd_toStartOf="@id/btnRepeat"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/btnPlayPause" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRepeat"
+            style="@style/PrimaryIconButton"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            app:icon="@drawable/ic_repeat_24"
+            android:checkable="true"
+            app:iconTint="@color/selector_active_tint"
+            app:layout_constraintBaseline_toBaselineOf="@id/btnPlayPause"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
