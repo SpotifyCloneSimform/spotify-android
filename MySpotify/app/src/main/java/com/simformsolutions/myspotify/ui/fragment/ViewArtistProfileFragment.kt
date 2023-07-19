@@ -46,7 +46,7 @@ class ViewArtistProfileFragment : BaseFragment<FragmentViewArtistProfileBinding,
         setupUI()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n", "StringFormatMatches")
     override fun initializeObservers() {
         super.initializeObservers()
         viewLifecycleOwner.lifecycleScope.launch {
@@ -55,7 +55,7 @@ class ViewArtistProfileFragment : BaseFragment<FragmentViewArtistProfileBinding,
                     viewModel.artistProfile.collectLatest {  artist ->
                         artist?.let {
                             binding.imgArtist.bindImage(it.images.firstOrNull()?.url ?: "", requireContext().getDrawable(R.drawable.baseline_music_note_24))
-                            binding.tvArtistFollowers.text = getString(R.string.followers, Formatter.formatNumber(artist.followers.total))
+                            binding.tvArtistFollowers.text = getString(R.string.followers_formatted, Formatter.formatNumber(artist.followers.total))
                         }
                     }
                 }
