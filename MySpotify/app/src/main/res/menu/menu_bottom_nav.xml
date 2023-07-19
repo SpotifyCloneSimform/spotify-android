@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="@string/home"
+        android:icon="@drawable/baseline_home_24"/>
+
     <item
         android:id="@+id/searchFragment"
         android:contentDescription="@string/cd_bottom_navigation_search"
@@ -7,7 +13,9 @@
         android:icon="@drawable/ic_search_16"/>
 
     <item
-        android:id="@+id/homeFragment"
-        android:title="@string/home"
-        android:icon="@drawable/baseline_home_24"/>
+        android:id="@+id/userLibraryFragment"
+        android:contentDescription="@string/user_library"
+        android:title="@string/library"
+        android:icon="@drawable/baseline_library_music_24" />
+
 </menu>

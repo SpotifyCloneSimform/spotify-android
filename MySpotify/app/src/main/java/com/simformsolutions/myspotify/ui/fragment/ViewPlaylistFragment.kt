@@ -7,6 +7,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.data.model.local.ItemType
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.databinding.FragmentViewPlaylistBinding
 import com.simformsolutions.myspotify.ui.adapter.ViewPlaylistSongsAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
@@ -34,11 +35,11 @@ class ViewPlaylistFragment : BaseFragment<FragmentViewPlaylistBinding, ViewPlayl
     private fun setupUI() {
         binding.rvSong.adapter = adapter
         when (args.type) {
-            ItemType.PLAYLIST -> {
+            LibraryItemType.PLAYLIST -> {
                 viewModel.getPlaylistSong(args.playlistId)
             }
 
-            ItemType.ALBUM -> {
+            LibraryItemType.ALBUM -> {
                 viewModel.getAlbumSongs(args.playlistId)
             }
 

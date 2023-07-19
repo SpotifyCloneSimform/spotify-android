@@ -9,5 +9,5 @@ data class HomeDisplayData (
     val image: String,
     val name: String,
     val id: String,
-    val type: ItemType
+    val type: LibraryItemType
 )

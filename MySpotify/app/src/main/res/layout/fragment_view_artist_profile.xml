@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <import type="com.simformsolutions.myspotify.utils.Formatter" />
+
+        <import type="com.simformsolutions.myspotify.data.model.local.ItemType" />
+
+        <variable
+            name="artist"
+            type="com.simformsolutions.myspotify.data.model.remote.Artist" />
+
+        <variable
+            name="viewModel"
+            type="com.simformsolutions.myspotify.ui.viewmodel.ArtistProfileViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            tools:context=".ui.fragment.ViewArtistProfileFragment">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:indicatorColor="?attr/colorSecondary"
+                android:indeterminateOnly="true"
+                android:visibility="@{ viewModel.isLoading() ? View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgArtist"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                app:layout_constraintDimensionRatio="1:1"
+                android:alpha="1"
+                android:contentDescription="@string/thumbnail"
+                android:foreground="@drawable/image_foreground"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/albums" />
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvArtistName"
+                tools:text="Name"
+                android:text="@{ artist.name }"
+                android:textAlignment="center"
+                android:layout_marginBottom="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="@id/imgArtist"
+                app:layout_constraintEnd_toEndOf="@id/imgArtist"
+                android:textSize="64sp"
+                app:layout_constraintBottom_toTopOf="@id/tvArtistFollowers"/>
+
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvArtistFollowers"
+                tools:text="11111 Followers"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/dp_16"
+                app:layout_constraintStart_toStartOf="@id/imgArtist"
+                app:layout_constraintEnd_toEndOf="@id/imgArtist"
+                android:layout_marginBottom="@dimen/dp_16"
+                app:layout_constraintBottom_toTopOf="@id/btnPlay"/>
+
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/play"
+                android:src="@drawable/baseline_play_circle_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imgArtist"
+                app:layout_constraintTop_toBottomOf="@id/imgArtist" />
+
+            <TextView
+                android:id="@+id/tvPopular"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/btnPlay"
+                android:text="Popular"
+                android:layout_marginTop="@dimen/dp_16"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPopularSong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/dp_16"
+                app:layout_constraintTop_toBottomOf="@id/tvPopular"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/tvRelatedArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/related_artist"
+                style="@style/TextViewTitle"
+                android:paddingHorizontal="@dimen/dp_16"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/rvPopularSong"
+                android:layout_marginTop="@dimen/dp_16" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRelatedArtist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/dp_15"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/tvRelatedArtist"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_marginBottom="@dimen/dp_24"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

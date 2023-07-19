@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="episode"
+            type="com.simformsolutions.myspotify.data.model.remote.Episode" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardCornerRadius="@dimen/dp_12"
+        app:cardBackgroundColor="?attr/colorSurface"
+        android:layout_marginBottom="@dimen/dp_16"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_16"
+            >
+
+            <ImageView
+                android:id="@+id/imgThumbnail"
+                android:layout_width="@dimen/dp_64"
+                android:layout_height="@dimen/dp_64"
+                tools:src="@drawable/albums"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvEpisodeTitle"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:layout_marginStart="@dimen/dp_8"
+                android:textSize="@dimen/sp_18"
+                android:text="@{ episode.name }"
+                tools:text="adfadsfsfaszfasfdfafsasfsfsafsadffsaffsfasfsfassasasasfsdfdsfsfsffsadfasfsafsdfsfdsfas"
+                app:layout_constraintStart_toEndOf="@id/imgThumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="@id/imgThumbnail"
+                app:layout_constraintBottom_toTopOf="@id/tvShowName"
+                />
+
+            <TextView
+                android:id="@+id/tvShowName"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                tools:textColor="@color/whitePure"
+                tools:text="adfadsfsf"
+                style="@style/TextViewSubTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvEpisodeTitle"
+                app:layout_constraintStart_toStartOf="@id/tvEpisodeTitle"
+                />
+
+            <TextView
+                android:id="@+id/tvEpisodeDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
+                android:ellipsize="end"
+                android:textColor="?android:attr/textColorSecondary"
+                android:text="@{ episode.description }"
+                android:layout_marginTop="@dimen/dp_12"
+                tools:text="adfadsfsfasdfadsff" />
+
+            <ImageButton
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/play"
+                android:src="@drawable/baseline_play_circle_24"
+                app:layout_constraintTop_toBottomOf="@id/tvEpisodeDescription"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="time"
+                android:id="@+id/tvDurtion"
+                android:textColor="?android:attr/textColorSecondary"
+                app:layout_constraintStart_toEndOf="@id/btnPlay"
+                app:layout_constraintTop_toTopOf="@id/btnPlay"
+                app:layout_constraintBottom_toBottomOf="@id/btnPlay"
+                android:layout_marginStart="@dimen/dp_8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

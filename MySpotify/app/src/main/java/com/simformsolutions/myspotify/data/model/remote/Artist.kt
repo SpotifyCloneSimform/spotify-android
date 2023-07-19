@@ -7,6 +7,7 @@ data class Artist(
     @SerializedName("followers") val followers: Followers,
     @SerializedName("href") val href: String,
     @SerializedName("id") val id: String,
+    @SerializedName("images") val images: List<Image>,
     @SerializedName("name") val name: String,
     @SerializedName("type") val type: String,
     @SerializedName("uri") val uri: String

@@ -1,8 +1,6 @@
 package com.simformsolutions.myspotify.data.service
 
-import com.simformsolutions.myspotify.data.model.remote.Album
 import com.simformsolutions.myspotify.data.model.remote.AlbumArtist
-import com.simformsolutions.myspotify.data.model.remote.Artist
 import com.simformsolutions.myspotify.data.model.remote.Playlist
 import com.simformsolutions.myspotify.data.model.remote.ViewAlbum
 import retrofit2.Response

@@ -6,6 +6,7 @@ import com.simformsolutions.myspotify.data.model.local.DisplayAlbumFooterView
 import com.simformsolutions.myspotify.data.model.local.DisplaySong
 import com.simformsolutions.myspotify.data.model.local.DisplaySongData
 import com.simformsolutions.myspotify.data.model.local.ItemType
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.model.remote.AlbumArtist
 import com.simformsolutions.myspotify.data.repository.ViewPlaylistRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
@@ -55,7 +56,7 @@ class ViewPlaylistViewModel @Inject constructor(
                                     item.track?.name,
                                     artists,
                                     item.track?.album?.images?.firstOrNull()?.url,
-                                    ItemType.PLAYLIST,
+                                    LibraryItemType.PLAYLIST,
                                     item.track?.id,
                                     item.track?.durationMs
                                 )
@@ -96,7 +97,7 @@ class ViewPlaylistViewModel @Inject constructor(
                         resource.data?.let { albumSong ->
                             val songData = albumSong.tracks.items.map { item ->
                                 val artist = item.artists.joinToString(", ") { it.name }
-                                DisplaySongData(item.name, artist, "", ItemType.ALBUM, item.id, item.durationMs)
+                                DisplaySongData(item.name, artist, "", LibraryItemType.ALBUM, item.id, item.durationMs)
                             }
 
                             _playlistsSongs.value = null
