@@ -57,9 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun setupUI() {
         setupGreetingTitle()
         binding.rvHome.adapter = adapter
-        viewModel.getPlaylists()
-        viewModel.getSongAlbum()
-        viewModel.getFeaturedPlaylist()
     }
 
     private fun setupGreetingTitle() {

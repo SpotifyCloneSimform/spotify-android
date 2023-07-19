@@ -4,20 +4,18 @@ import androidx.lifecycle.viewModelScope
 import com.simformsolutions.myspotify.data.model.remote.Category
 import com.simformsolutions.myspotify.data.repository.SearchRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
-import com.simformsolutions.myspotify.utils.PreferenceKeys
 import com.simformsolutions.myspotify.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
@@ -25,7 +23,11 @@ class SearchViewModel @Inject constructor(
     private val _categories = MutableStateFlow<List<Category>>(emptyList())
     val categories = _categories.asStateFlow()
 
-    fun getCategories() {
+    init {
+        getCategories()
+    }
+
+    private fun getCategories() {
         viewModelScope.launch {
             searchRepository.getCategories().collectLatest { resource ->
                 when (resource) {

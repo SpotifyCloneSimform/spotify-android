@@ -42,7 +42,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private fun setupUI() {
         categoryAdapter = CategoryAdapter()
         binding.rvCategory.adapter = categoryAdapter
-        viewModel.getCategories()
         setupListener()
     }
     

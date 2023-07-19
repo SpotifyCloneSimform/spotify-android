@@ -1,10 +1,9 @@
 package com.simformsolutions.myspotify.ui.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import com.simformsolutions.myspotify.data.model.local.ItemType
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.model.local.HomeData
 import com.simformsolutions.myspotify.data.model.local.HomeDisplayData
-import com.simformsolutions.myspotify.data.model.local.LibraryItemType
 import com.simformsolutions.myspotify.data.repository.HomeRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
 import com.simformsolutions.myspotify.utils.Resource
@@ -29,7 +28,13 @@ class HomeViewModel @Inject constructor(
     private val _errorMessage = MutableStateFlow("")
     val errorMessage = _errorMessage.asStateFlow()
 
-    fun getPlaylists() {
+    init {
+        getPlaylists()
+        getSongAlbum()
+        getFeaturedPlaylist()
+    }
+
+    private fun getPlaylists() {
         viewModelScope.launch {
             homeRepository.getPlaylists().collectLatest { resource ->
                 when (resource) {
@@ -42,7 +47,7 @@ class HomeViewModel @Inject constructor(
                             val data = data?.items?.mapNotNull { item ->
                                 item.images.firstOrNull()?.url?.let {
                                     HomeDisplayData(
-                                        it, item.name ?: "",
+                                        it, item.name,
                                         item.id,
                                         LibraryItemType.PLAYLIST
                                     )
@@ -64,7 +69,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getSongAlbum() {
+    private fun getSongAlbum() {
         viewModelScope.launch {
             homeRepository.getSongAlbum().collectLatest { resource ->
                 when (resource) {
@@ -75,15 +80,13 @@ class HomeViewModel @Inject constructor(
                     is Resource.Success -> {
                         resource.data.let { data ->
                             val data = data?.items?.mapNotNull { item ->
-                                item.album.images?.first()?.url?.let {
-                                    item.album.id?.let { it1 ->
-                                        HomeDisplayData(
-                                            it,
-                                            item.album.name ?: "N/A",
-                                            it1,
-                                            LibraryItemType.ALBUM
-                                        )
-                                    }
+                                item.album.images.firstOrNull()?.url?.let {
+                                    HomeDisplayData(
+                                        it,
+                                        item.album.name,
+                                        item.album.id,
+                                        LibraryItemType.ALBUM
+                                    )
                                 }
                             }
                             data?.let { data ->
@@ -101,7 +104,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getFeaturedPlaylist() {
+    private fun getFeaturedPlaylist() {
         viewModelScope.launch {
             homeRepository.getFeaturedPlaylist().collectLatest { resource ->
                 when (resource) {
@@ -113,14 +116,12 @@ class HomeViewModel @Inject constructor(
                         resource.data.let { data ->
                             val data = data?.playlists?.items?.mapNotNull { item ->
                                 item.images.firstOrNull()?.url?.let {
-                                    item.id?.let { it1 ->
-                                        HomeDisplayData(
-                                            it,
-                                            item.name ?: "N/A",
-                                            it1,
-                                            LibraryItemType.PLAYLIST
-                                        )
-                                    }
+                                    HomeDisplayData(
+                                        it,
+                                        item.name,
+                                        item.id,
+                                        LibraryItemType.PLAYLIST
+                                    )
                                 }
                             }
                             data?.let { data ->
@@ -142,5 +143,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 }
