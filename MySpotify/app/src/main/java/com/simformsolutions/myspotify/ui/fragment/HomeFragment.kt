@@ -1,7 +1,9 @@
 package com.simformsolutions.myspotify.ui.fragment
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +14,6 @@ import com.simformsolutions.myspotify.databinding.FragmentHomeBinding
 import com.simformsolutions.myspotify.ui.adapter.HomeAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
 import com.simformsolutions.myspotify.ui.viewmodel.HomeViewModel
-import com.simformsolutions.myspotify.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -54,6 +55,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
         }
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_toolbar_home, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.actionProfile) {
+            val destination = HomeFragmentDirections.actionHomeFragmentToUserProfileFragment()
+            findNavController().navigate(destination)
+            return true
+        }
+        return false
     }
 
     private fun setupUI() {

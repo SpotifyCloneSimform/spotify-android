@@ -4,9 +4,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.simformsolutions.myspotify.R
+import com.simformsolutions.myspotify.data.model.local.LibraryItemType
+import com.simformsolutions.myspotify.data.model.local.SearchItem
 import com.simformsolutions.myspotify.databinding.FragmentCategoryPlaylistBinding
+import com.simformsolutions.myspotify.listener.ItemClickListener
 import com.simformsolutions.myspotify.ui.adapter.SearchAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
 import com.simformsolutions.myspotify.ui.viewmodel.CategoryPlaylistViewModel
@@ -43,6 +47,15 @@ class CategoryPlaylistFragment :
 
     private fun setupUI() {
         playlistAdapter = SearchAdapter()
+        playlistAdapter.itemClickListener = object : ItemClickListener<SearchItem> {
+            override fun onClick(item: SearchItem, position: Int) {
+                val destination =
+                    CategoryPlaylistFragmentDirections.actionCategoryPlaylistFragmentToViewPlaylistFragment(
+                        item.id, LibraryItemType.PLAYLIST
+                    )
+                findNavController().navigate(destination)
+            }
+        }
         binding.rvCategoryPlaylist.adapter = playlistAdapter
         viewModel.getPlaylists(args.categoryId)
     }

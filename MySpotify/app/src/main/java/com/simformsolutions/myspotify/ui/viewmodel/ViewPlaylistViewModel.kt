@@ -29,9 +29,6 @@ class ViewPlaylistViewModel @Inject constructor(
     private val _albumFooterView = MutableStateFlow<DisplayAlbumFooterView?>(null)
     var albumFooterView = _albumFooterView.asStateFlow()
 
-    private val _ablumArtist = MutableStateFlow<AlbumArtist?>(null)
-    var ablumArtist = _ablumArtist.asStateFlow()
-
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
@@ -49,21 +46,20 @@ class ViewPlaylistViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         resource.data?.let { songs ->
-                            val songData = songs.tracks.items.map { item ->
+                            val songData = songs.tracks.items.filter { it.track.name.isNotEmpty() }.map { item ->
                                 val artists =
-                                    item.track?.artists?.joinToString(", ") { it.name }
+                                    item.track.artists.joinToString(", ") { it.name }
                                 DisplaySongData(
-                                    item.track?.name,
+                                    item.track.name,
                                     artists,
-                                    item.track?.album?.images?.firstOrNull()?.url,
+                                    item.track.album.images.firstOrNull()?.url,
                                     LibraryItemType.PLAYLIST,
-                                    item.track?.id,
-                                    item.track?.durationMs
+                                    item.track.id,
+                                    item.track.durationMs
                                 )
                             }
-                            songData?.let { songData ->
+                            songData.let { songData ->
                                 _playlistsSongs.value = null
-                                _isLoading.emit(false)
                                 _playlistsSongs.emit(
                                     DisplaySong(
                                         ItemType.PLAYLIST,
@@ -100,7 +96,7 @@ class ViewPlaylistViewModel @Inject constructor(
                                 val artist = item.artists.joinToString(", ") { it.name }
                                 DisplaySongData(item.name, artist, "", LibraryItemType.ALBUM, item.id, item.durationMs)
                             }
-                            _isLoading.emit(false)
+
                             _playlistsSongs.value = null
                             _playlistsSongs.emit(DisplaySong(ItemType.ALBUM, albumSong.images.firstOrNull()?.url, albumSong.name, albumSong.artists.firstOrNull()?.name, songData))
                             _albumFooterView.emit(albumSong.artists.firstOrNull()?.id?.let {
@@ -120,31 +116,4 @@ class ViewPlaylistViewModel @Inject constructor(
             }
         }
     }
-
-    fun getArtist(id: String) {
-        viewModelScope.launch {
-            viewPlaylistRepository.getAlbumArtist(id).collectLatest {
-                    resource ->
-                when (resource) {
-                    is Resource.Loading -> {
-                        _isLoading.emit(true)
-                    }
-
-                    is Resource.Success -> {
-                        _isLoading.emit(false)
-                        resource.data?.let {
-                            Log.d("artist", it.toString())
-                            _ablumArtist.emit(it)
-                        }
-                    }
-
-                    is Resource.Error -> {
-                        _isLoading.emit(false)
-                        resource.message?.let { _errorMessage.emit(it) }
-                    }
-                }
-            }
-        }
-    }
-
 }

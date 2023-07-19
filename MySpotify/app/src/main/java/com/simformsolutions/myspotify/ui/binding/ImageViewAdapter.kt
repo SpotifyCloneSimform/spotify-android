@@ -27,7 +27,7 @@ fun ImageView.bindImage(
             )
         )
         .apply {
-            isRounded?.let { circleCrop() }
+            isRounded?.let { if (isRounded) circleCrop() }
         }
         .into(this)
 }
