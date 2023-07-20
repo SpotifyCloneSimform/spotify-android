@@ -21,6 +21,9 @@ class MainViewModel @Inject constructor(
     private val _toolbarColor = MutableStateFlow<Int?>(null)
     val toolbarColor = _toolbarColor.asStateFlow()
 
+    private val _appBarScrollingEnabled = MutableStateFlow(true)
+    val appBarScrollingEnabled = _appBarScrollingEnabled.asStateFlow()
+
     fun setSubtitle(subtitle: String) {
         viewModelScope.launch {
             _subtitle.emit(subtitle)
@@ -30,6 +33,12 @@ class MainViewModel @Inject constructor(
     fun updateToolbarColor(color: Int?) {
         viewModelScope.launch {
             _toolbarColor.emit(color)
+        }
+    }
+
+    fun setAppBarScrollingEnabled(isEnabled: Boolean) {
+        viewModelScope.launch {
+            _appBarScrollingEnabled.emit(isEnabled)
         }
     }
 

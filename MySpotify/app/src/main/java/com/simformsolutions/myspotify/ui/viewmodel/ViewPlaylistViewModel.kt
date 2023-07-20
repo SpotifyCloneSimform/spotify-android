@@ -1,13 +1,11 @@
 package com.simformsolutions.myspotify.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.simformsolutions.myspotify.data.model.local.DisplayAlbumFooterView
 import com.simformsolutions.myspotify.data.model.local.DisplaySong
 import com.simformsolutions.myspotify.data.model.local.DisplaySongData
 import com.simformsolutions.myspotify.data.model.local.ItemType
 import com.simformsolutions.myspotify.data.model.local.LibraryItemType
-import com.simformsolutions.myspotify.data.model.remote.AlbumArtist
 import com.simformsolutions.myspotify.data.repository.ViewPlaylistRepository
 import com.simformsolutions.myspotify.ui.base.BaseViewModel
 import com.simformsolutions.myspotify.utils.Resource
@@ -46,20 +44,22 @@ class ViewPlaylistViewModel @Inject constructor(
 
                     is Resource.Success -> {
                         resource.data?.let { songs ->
-                            val songData = songs.tracks.items.filter { it.track.name.isNotEmpty() }.map { item ->
-                                val artists =
-                                    item.track.artists.joinToString(", ") { it.name }
-                                DisplaySongData(
-                                    item.track.name,
-                                    artists,
-                                    item.track.album.images.firstOrNull()?.url,
-                                    LibraryItemType.PLAYLIST,
-                                    item.track.id,
-                                    item.track.durationMs
-                                )
-                            }
+                            val songData = songs.tracks.items.filter { it.track.name.isNotEmpty() }
+                                .map { item ->
+                                    val artists =
+                                        item.track.artists.joinToString(", ") { it.name }
+                                    DisplaySongData(
+                                        item.track.name,
+                                        artists,
+                                        item.track.album.images.firstOrNull()?.url,
+                                        LibraryItemType.PLAYLIST,
+                                        item.track.id,
+                                        item.track.durationMs
+                                    )
+                                }
                             songData.let { songData ->
                                 _playlistsSongs.value = null
+                                _isLoading.emit(false)
                                 _playlistsSongs.emit(
                                     DisplaySong(
                                         ItemType.PLAYLIST,
@@ -94,14 +94,33 @@ class ViewPlaylistViewModel @Inject constructor(
                         resource.data?.let { albumSong ->
                             val songData = albumSong.tracks.items.map { item ->
                                 val artist = item.artists.joinToString(", ") { it.name }
-                                DisplaySongData(item.name, artist, "", LibraryItemType.ALBUM, item.id, item.durationMs)
+                                DisplaySongData(
+                                    item.name,
+                                    artist,
+                                    "",
+                                    LibraryItemType.ALBUM,
+                                    item.id,
+                                    item.durationMs
+                                )
                             }
 
                             _playlistsSongs.value = null
-                            _playlistsSongs.emit(DisplaySong(ItemType.ALBUM, albumSong.images.firstOrNull()?.url, albumSong.name, albumSong.artists.firstOrNull()?.name, songData))
+                            _playlistsSongs.emit(
+                                DisplaySong(
+                                    ItemType.ALBUM,
+                                    albumSong.images.firstOrNull()?.url,
+                                    albumSong.name,
+                                    albumSong.artists.firstOrNull()?.name,
+                                    songData
+                                )
+                            )
                             _albumFooterView.emit(albumSong.artists.firstOrNull()?.id?.let {
                                 DisplayAlbumFooterView(
-                                    it, albumSong.releaseDate, albumSong.totalTracks, albumSong.copyrights.firstOrNull()?.text ?: "")
+                                    it,
+                                    albumSong.releaseDate,
+                                    albumSong.totalTracks,
+                                    albumSong.copyrights.firstOrNull()?.text ?: ""
+                                )
                             })
 
                         }

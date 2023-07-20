@@ -27,6 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintWidth_max="@dimen/dp_300"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Round"
             bind:imageUrl="@{ userProfile.images[0].url }"
             tools:srcCompat="@drawable/albums" />

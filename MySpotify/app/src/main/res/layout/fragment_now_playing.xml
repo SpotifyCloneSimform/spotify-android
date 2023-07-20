@@ -37,10 +37,12 @@
             android:layout_height="@dimen/dp_0"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/dp_48"
             app:layout_constraintBottom_toTopOf="@id/txtTitle"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@id/guideEnd"
             app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintVertical_bias="0.3"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/albums"
             bind:imageUrl="@{ viewModel.track.image }" />
@@ -53,7 +55,8 @@
             android:maxLines="1"
             android:text="@{ viewModel.track.title }"
             android:textSize="@dimen/sp_20"
-            app:layout_constraintBottom_toTopOf="@id/txtArtist"
+            android:layout_marginTop="@dimen/dp_24"
+            app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
             app:layout_constraintEnd_toStartOf="@id/btnLike"
             app:layout_constraintStart_toStartOf="@id/guideStart"
             tools:text="Gorgeous" />
@@ -67,7 +70,7 @@
             android:text="@{ viewModel.track.artists }"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_18"
-            app:layout_constraintBottom_toTopOf="@id/sliderTime"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle"
             app:layout_constraintEnd_toStartOf="@id/btnLike"
             app:layout_constraintStart_toStartOf="@id/guideStart"
             tools:text="Taylor Swift" />
@@ -91,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/dp_16"
             android:value="0.3"
-            app:layout_constraintBottom_toTopOf="@id/btnPlayPause"
+            app:layout_constraintTop_toBottomOf="@id/txtArtist"
             app:layout_constraintEnd_toEndOf="@id/guideEnd"
             app:layout_constraintStart_toStartOf="@id/guideStart"
             app:thumbRadius="@dimen/dp_6" />
@@ -133,7 +136,7 @@
             app:icon="@drawable/selector_play_pause"
             app:iconSize="@dimen/dp_56"
             app:iconTint="?attr/colorOnBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sliderTime"
             app:layout_constraintEnd_toStartOf="@id/btnNext"
             app:layout_constraintStart_toEndOf="@id/btnPrevious" />
 

@@ -59,12 +59,14 @@ class SearchHistoryFragment : BaseFragment<FragmentSearchHistoryBinding, SearchH
         searchView.setOnQueryTextListener(this)
     }
 
-    override fun onDetach() {
+    override fun onDestroyView() {
+        activityViewModel.setAppBarScrollingEnabled(true)
         activityViewModel.updateToolbarColor(null)
-        super.onDetach()
+        super.onDestroyView()
     }
 
     private fun setupUI() {
+        activityViewModel.setAppBarScrollingEnabled(false)
         activityViewModel.updateToolbarColor(requireActivity().getThemeColor(com.google.android.material.R.attr.colorSurface))
         searchAdapter = SearchAdapter { item ->
             showTrackOptions(item.id)

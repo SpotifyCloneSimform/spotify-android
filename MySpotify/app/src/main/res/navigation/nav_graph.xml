@@ -21,7 +21,6 @@
     <fragment
         android:id="@+id/searchHistoryFragment"
         android:name="com.simformsolutions.myspotify.ui.fragment.SearchHistoryFragment"
-        android:label="@string/label_search_history"
         tools:layout="@layout/fragment_search_history">
         <action
             android:id="@+id/action_searchHistoryFragment_to_nowPlayingFragment"

@@ -9,6 +9,7 @@ import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.data.model.remote.Category
 import com.simformsolutions.myspotify.databinding.FragmentSearchBinding
 import com.simformsolutions.myspotify.listener.ItemClickListener
+import com.simformsolutions.myspotify.ui.activity.MainActivity
 import com.simformsolutions.myspotify.ui.adapter.CategoryAdapter
 import com.simformsolutions.myspotify.ui.base.BaseFragment
 import com.simformsolutions.myspotify.ui.viewmodel.SearchViewModel
