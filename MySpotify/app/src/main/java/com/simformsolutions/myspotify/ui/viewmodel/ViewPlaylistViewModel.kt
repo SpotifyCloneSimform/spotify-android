@@ -105,6 +105,7 @@ class ViewPlaylistViewModel @Inject constructor(
                             }
 
                             _playlistsSongs.value = null
+                            _isLoading.emit(false)
                             _playlistsSongs.emit(
                                 DisplaySong(
                                     ItemType.ALBUM,
