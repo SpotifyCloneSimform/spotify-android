@@ -3,10 +3,12 @@ package com.simformsolutions.myspotify.ui.activity
 import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.simformsolutions.myspotify.R
 import com.simformsolutions.myspotify.databinding.ActivityMainBinding
 import com.simformsolutions.myspotify.extentions.getThemeColor
@@ -46,6 +48,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     )
                 }
             }
+            launch {
+                viewModel.appBarScrollingEnabled.collectLatest { isEnabled ->
+                    setAppBarScrolling(isEnabled)
+                }
+            }
         }
     }
 
@@ -65,6 +72,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun setupNavigation() {
         binding.toolbar.setupWithNavController(navController)
         binding.bottomNav.setupWithNavController(navController)
+    }
+
+    private fun setAppBarScrolling(isEnable: Boolean) {
+        binding.toolbar.updateLayoutParams<AppBarLayout.LayoutParams> {
+            scrollFlags =
+                if (isEnable) {
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
+                            AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
+                } else {
+                    AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
+                }
+        }
     }
 
     private fun checkLoginStatus() {

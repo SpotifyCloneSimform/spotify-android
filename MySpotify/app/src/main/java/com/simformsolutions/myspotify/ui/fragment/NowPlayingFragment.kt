@@ -1,5 +1,7 @@
 package com.simformsolutions.myspotify.ui.fragment
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -42,13 +44,17 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding, NowPlayingVie
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroyView() {
         activityViewModel.setSubtitle("")
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        super.onDestroyView()
     }
 
+
+    @SuppressLint("SourceLockedOrientationActivity")
     private fun setupUI() {
         setupTitle()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         viewModel.setupPlayingQueue(args.trackId, args.id, args.type)
     }
 

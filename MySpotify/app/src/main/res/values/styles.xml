@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="PrimaryToolbar" parent="Widget.Material3.Toolbar">
+
+    </style>
+
     <style name="PrimaryBottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="itemActiveIndicatorStyle">@style/MyIndicator</item>
     </style>

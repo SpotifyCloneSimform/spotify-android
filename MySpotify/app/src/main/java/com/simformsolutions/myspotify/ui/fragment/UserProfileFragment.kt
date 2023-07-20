@@ -53,6 +53,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
                 findNavController().navigate(destination)
             }
         }
+        binding.rvPlaylists.setHasFixedSize(false)
         binding.rvPlaylists.adapter = profileMediaAdapter
     }
 }
