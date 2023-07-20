@@ -45,6 +45,7 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding, NowPlayingVie
     }
 
     override fun onDestroyView() {
+        activityViewModel.setAppBarScrollingEnabled(true)
         activityViewModel.setSubtitle("")
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         super.onDestroyView()
@@ -53,6 +54,7 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding, NowPlayingVie
 
     @SuppressLint("SourceLockedOrientationActivity")
     private fun setupUI() {
+        activityViewModel.setAppBarScrollingEnabled(false)
         setupTitle()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         viewModel.setupPlayingQueue(args.trackId, args.id, args.type)

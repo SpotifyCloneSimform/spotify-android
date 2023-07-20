@@ -82,6 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS or
                             AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP
                 } else {
+                    binding.toolbar.scrollY = 0
                     AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
                 }
         }
